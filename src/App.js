@@ -3,7 +3,6 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
 } from "react-router-dom";
 import Form from "./pages/Form";
 import LogIn from "./pages/LogIn";

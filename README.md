@@ -1,4 +1,13 @@
+## Insumos-medicos-react-client
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+### Installation Steps
+
+- Clone the project and go to the folder that was just created.
+- Run `npm install` 
+- Clone the `.env.sample` folder and name it to `.env`.
+- Fill in the required variables.
 
 ## Available Scripts
 

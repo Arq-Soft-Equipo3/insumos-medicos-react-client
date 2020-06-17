@@ -14,7 +14,7 @@ import Navbar from "./components/Navbar";
 function App() {
   return (
     <Router>
-      <div style={{display: 'flex', flexDirection: 'column', height: '100%'}}>
+      <div className="app-container">
         <Navbar />
         <Switch>
           <Route path="/" exact={true} component={Home} />

@@ -42,7 +42,7 @@ const LogIn = (props) => {
 
   return (
     redirect ? <Redirect to={referrer}/> :
-      <div className="hero is-primary" style={{flex: 1}}>
+      <div className="hero is-primary flex-1">
         <div className="hero-body">
           <h1 className="title has-text-centered is-size-3">Iniciar Sesión</h1>
           <div className="columns is-centered">

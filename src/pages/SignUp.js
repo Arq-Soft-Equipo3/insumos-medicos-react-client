@@ -94,7 +94,7 @@ const SignUp = () => {
                     <label className="label" htmlFor="position">Cargo:</label>
                     <p className="control has-icons-left">
                       <input id="position" name="position" className="input" type="text"
-                             placeholder="¿Cual es tu cargo?" required/>
+                             placeholder="¿Cuál es tu cargo?" required/>
                       <span className="icon is-small is-left"><i className="fas fa-briefcase"></i></span>
                     </p>
                   </div>

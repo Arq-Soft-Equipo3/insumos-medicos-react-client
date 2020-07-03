@@ -3,6 +3,9 @@ import {Link} from "react-router-dom";
 import AuthLink from "./AuthLink";
 import logo from './../logo.jpg';
 
+const isAuthenticated = () => !!localStorage.getItem('token');
+
+
 const Navbar = () => {
   return (
     <nav className="navbar" role="navigation" aria-label="main navigation">
@@ -19,7 +22,8 @@ const Navbar = () => {
       <div className="navbar-menu">
         <div className="navbar-start">
           <Link to="/" className="navbar-item">Inicio</Link>
-          <Link to="/solicitud" className="navbar-item">Ingresar solicitud</Link>
+          { isAuthenticated() && <Link to="/solicitud" className="navbar-item">Cargar solicitud</Link>}
+          { isAuthenticated() && <Link to="/mis-solicitudes" className="navbar-item">Mis solicitudes</Link>}
         </div>
 
         <div className="navbar-end">

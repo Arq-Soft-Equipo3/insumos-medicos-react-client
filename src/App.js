@@ -4,12 +4,13 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
-import Form from "./pages/Form";
 import LogIn from "./pages/LogIn";
 import Home from "./pages/Home";
 import PrivateRoute from "./components/PrivateRoute";
 import SignUp from "./pages/SignUp";
 import Navbar from "./components/Navbar";
+import Applications from './pages/Applications';
+import ApplicationForm from './pages/ApplicationForm';
 
 function App() {
   return (
@@ -21,7 +22,8 @@ function App() {
           <Route path="/login" component={LogIn} />
           <Route path="/signup" component={SignUp} />
           <Route path="/logout" component={LogIn} />
-          <PrivateRoute path="/solicitud" component={Form} />
+          <PrivateRoute path="/solicitud" component={ApplicationForm} />
+          <PrivateRoute path="/mis-solicitudes" component={Applications} />
         </Switch>
       </div>
     </Router>

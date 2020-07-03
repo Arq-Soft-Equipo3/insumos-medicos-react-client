@@ -83,9 +83,9 @@ const SignUp = () => {
                     </p>
                   </div>
                   <div className="field">
-                    <label className="label" htmlFor="entity">Entidad:</label>
+                    <label className="label" htmlFor="organization">Entidad:</label>
                     <p className="control has-icons-left">
-                      <input id="entity" name="entity" className="input" type="text"
+                      <input id="organization" name="organization" className="input" type="text"
                              placeholder="¿A qué entidad perteneces?" required/>
                       <span className="icon is-small is-left"><i className="fas fa-hospital"></i></span>
                     </p>

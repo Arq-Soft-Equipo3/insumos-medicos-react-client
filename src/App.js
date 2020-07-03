@@ -8,7 +8,6 @@ import LogIn from "./pages/LogIn";
 import Home from "./pages/Home";
 import PrivateRoute from "./components/PrivateRoute";
 import SignUp from "./pages/SignUp";
-import Navbar from "./components/Navbar";
 import Applications from './pages/Applications';
 import ApplicationForm from './pages/ApplicationForm';
 
@@ -16,7 +15,6 @@ function App() {
   return (
     <Router>
       <div className="app-container">
-        <Navbar />
         <Switch>
           <Route path="/" exact={true} component={Home} />
           <Route path="/login" component={LogIn} />

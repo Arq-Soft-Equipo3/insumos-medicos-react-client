@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Redirect } from "react-router-dom";
 import {logIn} from "../services/auth";
+import Navbar from "../components/Navbar";
 
 const errorMessages = {
   422: 'Revisá los datos ingresados y volvé a intentar.',
@@ -42,7 +43,9 @@ const LogIn = (props) => {
 
   return (
     redirect ? <Redirect to={referrer}/> :
-      <div className="hero is-primary flex-1">
+      <>
+        <Navbar/>
+        <div className="hero is-primary flex-1">
         <div className="hero-body">
           <h1 className="title has-text-centered is-size-3">Iniciar Sesión</h1>
           <div className="columns is-centered">
@@ -73,6 +76,7 @@ const LogIn = (props) => {
           </div>
         </div>
       </div>
+      </>
   );
 };
 

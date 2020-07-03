@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {Redirect} from "react-router-dom";
 import {signUp} from "../services/auth";
+import Navbar from "../components/Navbar";
 
 const errorMessages = {
   422: 'Revisá los datos ingresados y volvé a intentar.',
@@ -40,6 +41,8 @@ const SignUp = () => {
 
   return (
     redirect ? <Redirect to="/"/> :
+      <>
+      <Navbar/>
       <div className="hero is-primary flex-1">
         <div className="hero-body">
           <h1 className="title has-text-centered is-size-3">Registrarme</h1>
@@ -145,6 +148,7 @@ const SignUp = () => {
           </div>
         </div>
       </div>
+      </>
   );
 };
 

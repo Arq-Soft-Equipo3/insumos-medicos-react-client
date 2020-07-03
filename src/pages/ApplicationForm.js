@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { submitApplication } from '../services/applications';
+import Navbar from "../components/Navbar";
+
 
 const errorMessages = {
   404: 'Página no encontrada.',
@@ -42,6 +44,8 @@ const ApplicationForm = () => {
   }
 
   return (
+    <>
+      <Navbar />
     <section className="hero">
       <div className="hero-body">
         <div className="container">
@@ -119,6 +123,7 @@ const ApplicationForm = () => {
         </div>
       </div>
     </section>
+    </>
   );
 };
 

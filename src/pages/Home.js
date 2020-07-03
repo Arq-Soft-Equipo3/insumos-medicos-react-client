@@ -1,7 +1,14 @@
 import React from 'react';
+import Navbar from "../components/Navbar";
+
+const isAuthenticated = () => !!localStorage.getItem('token');
 
 const Home = () => {
+  const welcomeMessage = isAuthenticated() ? "Carga tu solicitud de insumos que nosotros nos encargaremos de derivarla a la organización correspondiente." : "Registrate en nuestro sistema para poder cargar tu solicitud de insumos que nosotros nos encargaremos de derivarla a la organización correspondiente.";
+
   return (
+    <>
+    <Navbar />
     <section className="hero">
       <div className="hero-body">
         <div className="container">
@@ -10,7 +17,7 @@ const Home = () => {
               <div className="column is-8 is-offset-2">
                 <div className="content is-medium">
                   <h1 className="title">Bienvenido!</h1>
-                  <p>Registrate en nuestro sistema para poder cargar tu solicitud de insumos que nosotros nos encargaremos de derivarla a la organización correspondiente.</p>
+                  <p>{ welcomeMessage }</p>
                 </div>
               </div>
             </div>
@@ -25,6 +32,7 @@ const Home = () => {
         </div>
       </div>
     </section>
+    </>
   );
 };
 

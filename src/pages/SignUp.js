@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom';
 import classNames from 'classnames';
 import { signUp } from '../services/auth';
 import Navbar from '../components/Navbar';
-import { getFormData } from '../helpers';
+import { getFormData, renderOption } from '../helpers';
 
 const errorMessages = {
   422: 'Revisá los datos ingresados y volvé a intentar.',
@@ -168,7 +168,7 @@ const SignUp = () => {
                           <div className="select is-fullwidth">
                             <select id="city" name="city" required>
                               <option value="">¿En qué localidad se encuentra?</option>
-                              {cities.map((e) => <option value={e}>{e}</option>)}
+                              {cities.map(renderOption)}
                             </select>
                           </div>
                           <div className="icon is-small is-left">

@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import { submitApplication } from '../services/applications';
 import Navbar from '../components/Navbar';
-import { getFormData } from '../helpers';
+import { getFormData, renderOption } from '../helpers';
 
 const responseMessages = {
   200: (
@@ -81,7 +81,7 @@ const ApplicationForm = () => {
                               <div className="select is-fullwidth">
                                 <select id="supply" onChange={handleChange} name="supply" required>
                                   <option value="">¿Qué insumo necesita?</option>
-                                  {supplies.map((e) => <option value={e}>{e}</option>)}
+                                  {supplies.map(renderOption)}
                                 </select>
                               </div>
                               <div className="icon is-small is-left">
@@ -96,7 +96,7 @@ const ApplicationForm = () => {
                               <div className="select is-fullwidth">
                                 <select id="medicine" name="medicine" required>
                                   <option value="">¿Qué medicamento necesita?</option>
-                                  {medicines.map((e) => <option value={e}>{e}</option>)}
+                                  {medicines.map(renderOption)}
                                 </select>
                               </div>
                               <div className="icon is-small is-left">
@@ -111,7 +111,7 @@ const ApplicationForm = () => {
                               <div className="select is-fullwidth">
                                 <select id="area" name="area" required>
                                   <option value="">¿A que area esta destinado?</option>
-                                  {areas.map((e) => <option value={e}>{e}</option>)}
+                                  {areas.map(renderOption)}
                                 </select>
                               </div>
                               <div className="icon is-small is-left">

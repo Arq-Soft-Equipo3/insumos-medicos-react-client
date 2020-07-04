@@ -1,6 +1,7 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
 import { isAuthenticated } from '../services/auth';
+import banner from '../banner.jpg';
 
 const Home = () => (
   <>
@@ -25,7 +26,7 @@ const Home = () => (
           <div className="columns">
             <div className="column is-8 is-offset-2">
               <figure className="image is-16by9">
-                <img src="https://www.camarabaq.org.co/wp-content/uploads/2020/04/3461699-min-1200x650.jpg" alt="" />
+                <img src={banner} alt="insumos médicos" />
               </figure>
             </div>
           </div>

@@ -12,4 +12,8 @@ const signUp = (body) => fetch(`${process.env.REACT_APP_API_HOST}/user/signup`, 
 
 const isAuthenticated = () => !!localStorage.getItem('token');
 
-export { logIn, signUp, isAuthenticated };
+const logout = () => localStorage.removeItem('token');
+
+export {
+  logIn, signUp, isAuthenticated, logout,
+};

@@ -4,12 +4,10 @@ import {
   Switch,
   Route,
 } from 'react-router-dom';
-import LogIn from './pages/LogIn';
-import Home from './pages/Home';
+import {
+  Home, SignUp, LogIn, Applications, ApplicationForm,
+} from './pages';
 import PrivateRoute from './components/PrivateRoute';
-import SignUp from './pages/SignUp';
-import Applications from './pages/Applications';
-import ApplicationForm from './pages/ApplicationForm';
 
 function App() {
   return (

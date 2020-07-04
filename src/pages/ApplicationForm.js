@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import classNames from 'classnames';
 import { submitApplication } from '../services/applications';
 import Navbar from '../components/Navbar';
+import { getFormData } from '../helpers';
 
 const errorMessages = {
   404: 'Página no encontrada.',
@@ -10,11 +11,11 @@ const errorMessages = {
   500: 'Ocurrió un error en el servidor, intenta nuevamente.',
 };
 
-const getFormData = (target) => {
-  const formData = new FormData(target);
-  const formEntries = Object.fromEntries(formData);
-  return JSON.stringify(formEntries);
-};
+const medicines = ['A', 'B', 'C', 'D'];
+
+const areas = ['Atención de pacientes', 'Terapia Intensiva', 'Técnicos'];
+
+const supplies = ['Máscaras protectoras', 'Barbijos', 'Respiradores', 'Guantes', 'Medicamentos'];
 
 const ApplicationForm = () => {
   const [isMedicine, setIsMedicine] = useState(false);
@@ -66,11 +67,7 @@ const ApplicationForm = () => {
                               <div className="select is-fullwidth">
                                 <select id="supply" onChange={handleChange} name="supply" required>
                                   <option value="">¿Qué insumo necesita?</option>
-                                  <option value="Máscaras protectoras">Máscaras protectoras</option>
-                                  <option value="Barbijos">Barbijos</option>
-                                  <option value="Respiradores">Respiradores</option>
-                                  <option value="Guantes">Guantes</option>
-                                  <option value="Medicamentos">Medicamentos </option>
+                                  {supplies.map((e) => <option value={e}>{e}</option>)}
                                 </select>
                               </div>
                               <div className="icon is-small is-left">
@@ -85,10 +82,7 @@ const ApplicationForm = () => {
                               <div className="select is-fullwidth">
                                 <select id="medicine" name="medicine" required>
                                   <option value="">¿Qué medicamento necesita?</option>
-                                  <option value="A">A</option>
-                                  <option value="B">B</option>
-                                  <option value="C">C</option>
-                                  <option value="D">D</option>
+                                  {medicines.map((e) => <option value={e}>{e}</option>)}
                                 </select>
                               </div>
                               <div className="icon is-small is-left">
@@ -103,9 +97,7 @@ const ApplicationForm = () => {
                               <div className="select is-fullwidth">
                                 <select id="area" name="area" required>
                                   <option value="">¿A que area esta destinado?</option>
-                                  <option value="Atención de pacientes">Atención de pacientes</option>
-                                  <option value="Terapia Intensiva">Terapia Intensiva</option>
-                                  <option value="Técnicos">Técnicos</option>
+                                  {areas.map((e) => <option value={e}>{e}</option>)}
                                 </select>
                               </div>
                               <div className="icon is-small is-left">
@@ -114,7 +106,7 @@ const ApplicationForm = () => {
                             </div>
                           </div>
                           <button
-                            type="button"
+                            type="submit"
                             className={classNames('button', 'is-fullwidth', 'is-info', 'is-outlined', 'is-medium', { 'is-loading': isLoading })}
                           >
                             Enviar

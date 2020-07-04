@@ -3,17 +3,12 @@ import { Redirect } from 'react-router-dom';
 import classNames from 'classnames';
 import { signUp } from '../services/auth';
 import Navbar from '../components/Navbar';
+import { getFormData } from '../helpers';
 
 const errorMessages = {
   422: 'Revisá los datos ingresados y volvé a intentar.',
   409: 'El email ingresado ya fue registrado previamente.',
   500: 'Ocurrió un error en el servidor, intenta nuevamente.',
-};
-
-const getFormData = (target) => {
-  const formData = new FormData(target);
-  const formEntries = Object.fromEntries(formData);
-  return JSON.stringify(formEntries);
 };
 
 const SignUp = () => {
@@ -180,7 +175,7 @@ const SignUp = () => {
                         </div>
                       </div>
                       <button
-                        type="button"
+                        type="submit"
                         className={classNames('button', 'is-fullwidth', 'is-info', 'is-outlined', 'is-medium', { 'is-loading': isLoading })}
                       >
                         Registrarme

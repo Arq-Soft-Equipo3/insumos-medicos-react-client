@@ -141,10 +141,10 @@ const SignUp = () => {
                         </p>
                       </div>
                       <div className="field">
-                        <label className="label" htmlFor="position">Localidad:</label>
+                        <label className="label" htmlFor="city">Localidad:</label>
                         <div className="control has-icons-left">
                           <div className="select is-fullwidth">
-                            <select name="city" required>
+                            <select id="city" name="city" required>
                               <option value="">¿En qué localidad se encuentra?</option>
                               <option value="Almirante Brown">Almirante Brown</option>
                               <option value="Avellaneda">Avellaneda</option>
@@ -178,11 +178,7 @@ const SignUp = () => {
                           </div>
                         </div>
                       </div>
-                      <button
-                        className={`button is-fullwidth is-info is-outlined is-medium ${isLoading ? 'is-loading' : ''}`}
-                      >
-                        Registrarme
-                      </button>
+                      <button className={`button is-fullwidth is-info is-outlined is-medium ${isLoading ? 'is-loading' : ''}`}>Registrarme</button>
                     </form>
                   </div>
                 </div>

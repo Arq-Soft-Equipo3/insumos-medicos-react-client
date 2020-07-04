@@ -37,9 +37,7 @@ const ApplicationForm = () => {
     setIsLoading(false);
   };
 
-  const handleChange = ({ target: { value } }) => {
-    value === 'Medicamentos' && setIsMedicine(true);
-  };
+  const handleChange = ({ target: { value } }) => value === 'Medicamentos' && setIsMedicine(true);
 
   return (
     <>
@@ -65,7 +63,7 @@ const ApplicationForm = () => {
                             <label className="label" htmlFor="supply">Insumo:</label>
                             <div className="control has-icons-left">
                               <div className="select is-fullwidth">
-                                <select onChange={handleChange} name="supply" required>
+                                <select id="supply" onChange={handleChange} name="supply" required>
                                   <option value="">¿Qué insumo necesita?</option>
                                   <option value="Máscaras protectoras">Máscaras protectoras</option>
                                   <option value="Barbijos">Barbijos</option>
@@ -84,7 +82,7 @@ const ApplicationForm = () => {
                             <label className="label" htmlFor="medicine">Medicamento:</label>
                             <div className="control has-icons-left">
                               <div className="select is-fullwidth">
-                                <select name="medicine" required>
+                                <select id="medicine" name="medicine" required>
                                   <option value="">¿Qué medicamento necesita?</option>
                                   <option value="A">A</option>
                                   <option value="B">B</option>
@@ -102,7 +100,7 @@ const ApplicationForm = () => {
                             <label className="label" htmlFor="area">Área:</label>
                             <div className="control has-icons-left">
                               <div className="select is-fullwidth">
-                                <select name="area" required>
+                                <select id="area" name="area" required>
                                   <option value="">¿A que area esta destinado?</option>
                                   <option value="Atención de pacientes">Atención de pacientes</option>
                                   <option value="Terapia Intensiva">Terapia Intensiva</option>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import classNames from 'classnames';
 import { submitApplication } from '../services/applications';
 import Navbar from '../components/Navbar';
 
@@ -112,7 +113,12 @@ const ApplicationForm = () => {
                               </div>
                             </div>
                           </div>
-                          <button className={`button is-info is-outlined is-medium ${isLoading ? 'is-loading' : ''}`}>Enviar</button>
+                          <button
+                            type="button"
+                            className={classNames('button', 'is-fullwidth', 'is-info', 'is-outlined', 'is-medium', { 'is-loading': isLoading })}
+                          >
+                            Enviar
+                          </button>
                         </form>
                       </div>
                     </div>

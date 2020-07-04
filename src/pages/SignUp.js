@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
+import classNames from 'classnames';
 import { signUp } from '../services/auth';
 import Navbar from '../components/Navbar';
 
@@ -178,7 +179,12 @@ const SignUp = () => {
                           </div>
                         </div>
                       </div>
-                      <button className={`button is-fullwidth is-info is-outlined is-medium ${isLoading ? 'is-loading' : ''}`}>Registrarme</button>
+                      <button
+                        type="button"
+                        className={classNames('button', 'is-fullwidth', 'is-info', 'is-outlined', 'is-medium', { 'is-loading': isLoading })}
+                      >
+                        Registrarme
+                      </button>
                     </form>
                   </div>
                 </div>

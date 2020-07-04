@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
+import classNames from 'classnames';
 import { logIn } from '../services/auth';
 import Navbar from '../components/Navbar';
 
@@ -72,7 +73,12 @@ const LogIn = (props) => {
                           <span className="icon is-small is-left"><i className="fas fa-lock" /></span>
                         </p>
                       </div>
-                      <button className={`button is-fullwidth is-info is-outlined is-medium ${isLoading ? 'is-loading' : ''}`}>Iniciar sesión</button>
+                      <button
+                        type="button"
+                        className={classNames('button', 'is-fullwidth', 'is-info', 'is-outlined', 'is-medium', { 'is-loading': isLoading })}
+                      >
+                        Iniciar sesión
+                      </button>
                     </form>
                   </div>
                 </div>

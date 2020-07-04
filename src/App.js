@@ -3,11 +3,11 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-} from "react-router-dom";
-import LogIn from "./pages/LogIn";
-import Home from "./pages/Home";
-import PrivateRoute from "./components/PrivateRoute";
-import SignUp from "./pages/SignUp";
+} from 'react-router-dom';
+import LogIn from './pages/LogIn';
+import Home from './pages/Home';
+import PrivateRoute from './components/PrivateRoute';
+import SignUp from './pages/SignUp';
 import Applications from './pages/Applications';
 import ApplicationForm from './pages/ApplicationForm';
 
@@ -16,7 +16,7 @@ function App() {
     <Router>
       <div className="app-container">
         <Switch>
-          <Route path="/" exact={true} component={Home} />
+          <Route path="/" exact component={Home} />
           <Route path="/login" component={LogIn} />
           <Route path="/signup" component={SignUp} />
           <Route path="/logout" component={LogIn} />

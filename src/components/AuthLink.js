@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
-
-const isAuthenticated = () => !!localStorage.getItem('token');
+import { isAuthenticated } from '../services/auth';
 
 const logout = () => {
   localStorage.removeItem('token');

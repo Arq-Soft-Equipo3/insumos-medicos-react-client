@@ -10,4 +10,6 @@ const signUp = (body) => fetch(`${process.env.REACT_APP_API_HOST}/user/signup`, 
   headers: { 'Content-Type': 'application/json' },
 });
 
-export { logIn, signUp };
+const isAuthenticated = () => !!localStorage.getItem('token');
+
+export { logIn, signUp, isAuthenticated };

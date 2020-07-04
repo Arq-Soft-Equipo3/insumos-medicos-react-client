@@ -1,7 +1,6 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
-
-const isAuthenticated = () => !!localStorage.getItem('token');
+import { isAuthenticated } from '../services/auth';
 
 const Home = () => {
   const welcomeMessage = isAuthenticated() ? 'Carga tu solicitud de insumos que nosotros nos encargaremos de derivarla a la organización correspondiente.' : 'Registrate en nuestro sistema para poder cargar tu solicitud de insumos que nosotros nos encargaremos de derivarla a la organización correspondiente.';

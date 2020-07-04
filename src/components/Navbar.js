@@ -2,8 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import AuthLink from './AuthLink';
 import logo from '../logo.jpg';
-
-const isAuthenticated = () => !!localStorage.getItem('token');
+import { isAuthenticated } from '../services/auth';
 
 const Navbar = () => (
   <nav className="navbar" role="navigation" aria-label="main navigation">

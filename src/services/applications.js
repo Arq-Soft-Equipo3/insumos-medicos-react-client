@@ -1,10 +1,10 @@
 const submitApplication = async (body) => fetch(`${process.env.REACT_APP_API_HOST}/applications`, {
   method: 'POST',
-  body,
   headers: {
     'Content-Type': 'application/json',
     Authorization: `Bearer ${localStorage.getItem('token')}`,
   },
+  body,
 });
 
 const list = () => fetch(`${process.env.REACT_APP_API_HOST}/applications`, {
@@ -12,4 +12,10 @@ const list = () => fetch(`${process.env.REACT_APP_API_HOST}/applications`, {
   headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${localStorage.getItem('token')}` },
 });
 
-export { submitApplication, list };
+const cancel = (body) => fetch(`${process.env.REACT_APP_API_HOST}/applications/cancel`, {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${localStorage.getItem('token')}` },
+  body,
+});
+
+export { submitApplication, list, cancel };

@@ -1,10 +1,18 @@
 import React, { useState } from 'react';
 import classNames from 'classnames';
+import { Link } from 'react-router-dom';
 import { submitApplication } from '../services/applications';
 import Navbar from '../components/Navbar';
 import { getFormData } from '../helpers';
 
-const errorMessages = {
+const responseMessages = {
+  200: (
+    <>
+      Su solicitud fue cargada con éxito, puede seguir el estado de la misma
+      {' '}
+      <Link to="/mis-solicitudes">aquí</Link>
+    </>
+  ),
   404: 'Página no encontrada.',
   422: 'Revisá los datos ingresados y volvé a intentar.',
   409: 'El email ingresado ya fue registrado previamente.',
@@ -21,6 +29,7 @@ const ApplicationForm = () => {
   const [isMedicine, setIsMedicine] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -29,9 +38,9 @@ const ApplicationForm = () => {
     try {
       const response = await submitApplication(body);
       if (!response.ok) {
-        setIsError({ message: errorMessages[response.status] });
+        setIsError({ message: responseMessages[response.status] });
       } else {
-        // ...
+        setIsSuccess({ message: responseMessages[response.status] });
       }
     } catch (e) {
       console.log(e);
@@ -60,6 +69,11 @@ const ApplicationForm = () => {
                           <div className="message is-danger">
                             <div className="message-body">{isError.message}</div>
                           </div>
+                          )}
+                          {isSuccess && (
+                            <div className="message is-success">
+                              <div className="message-body">{isSuccess.message}</div>
+                            </div>
                           )}
                           <div className="field">
                             <label className="label" htmlFor="supply">Insumo:</label>

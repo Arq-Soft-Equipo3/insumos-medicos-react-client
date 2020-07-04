@@ -11,6 +11,32 @@ const errorMessages = {
   500: 'Ocurrió un error en el servidor, intenta nuevamente.',
 };
 
+const cities = ['Almirante Brown',
+  'Avellaneda',
+  'Berazategui',
+  'Buenos Aires',
+  'Esteban Echeverría',
+  'Ezeiza',
+  'Florencio Varela',
+  'General San Martín',
+  'Hurlingham',
+  'Ituzaingó',
+  'José C. Paz',
+  'La Matanza',
+  'Lanús',
+  'Lomas de Zamora',
+  'Malvinas Argentinas',
+  'Merlo',
+  'Moreno',
+  'Morón',
+  'Quilmes',
+  'San Fernando',
+  'San Isidro',
+  'San Miguel',
+  'Tigre',
+  'Tres de Febrero',
+  'Vicente López'];
+
 const SignUp = () => {
   const [redirect, setRedirect] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -142,31 +168,7 @@ const SignUp = () => {
                           <div className="select is-fullwidth">
                             <select id="city" name="city" required>
                               <option value="">¿En qué localidad se encuentra?</option>
-                              <option value="Almirante Brown">Almirante Brown</option>
-                              <option value="Avellaneda">Avellaneda</option>
-                              <option value="Berazategui">Berazategui</option>
-                              <option value="Buenos Aires">Buenos Aires</option>
-                              <option value="Esteban Echeverría">Esteban Echeverría</option>
-                              <option value="Ezeiza">Ezeiza</option>
-                              <option value="Florencio Varela">Florencio Varela</option>
-                              <option value="General San Martín">General San Martín</option>
-                              <option value="Hurlingham">Hurlingham</option>
-                              <option value="Ituzaingó">Ituzaingó</option>
-                              <option value="José C. Paz">José C. Paz</option>
-                              <option value="La Matanza">La Matanza</option>
-                              <option value="Lanús">Lanús</option>
-                              <option value="Lomas de Zamora">Lomas de Zamora</option>
-                              <option value="Malvinas Argentinas">Malvinas Argentinas</option>
-                              <option value="Merlo">Merlo</option>
-                              <option value="Moreno">Moreno</option>
-                              <option value="Morón">Morón</option>
-                              <option value="Quilmes">Quilmes</option>
-                              <option value="San Fernando">San Fernando</option>
-                              <option value="San Isidro">San Isidro</option>
-                              <option value="San Miguel">San Miguel</option>
-                              <option value="Tigre">Tigre</option>
-                              <option value="Tres de Febrero">Tres de Febrero</option>
-                              <option value="Vicente López">Vicente López</option>
+                              {cities.map((e) => <option value={e}>{e}</option>)}
                             </select>
                           </div>
                           <div className="icon is-small is-left">

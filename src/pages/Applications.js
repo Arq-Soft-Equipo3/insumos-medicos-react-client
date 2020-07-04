@@ -1,21 +1,72 @@
 import React, { useState, useEffect } from 'react';
-import { list } from '../services/applications';
+import isArray from 'lodash.isarray';
+import size from 'lodash.size';
+import classNames from 'classnames';
+import { list, cancel } from '../services/applications';
 import Navbar from '../components/Navbar';
 
 const statuses = {
   pending: 'Pendiente',
   rejected: 'Rechazado',
   approved: 'Aprobado',
+  cancelled: 'Cancelada',
+};
+
+const responseMessages = {
+  200: 'Su solicitud ha sido cancelada con éxito.',
+  403: 'La solicitud que intentó cancelar no le pertenece.',
+  412: 'No se puede cancelar una solicitud que no se encuentra en estado pendiente.',
+  422: 'Revisá los datos ingresados y volvé a intentar.',
+  500: 'Ocurrió un error en el servidor, intenta nuevamente.',
+};
+
+const CancelButton = ({ applicationId, onCancel }) => {
+  const [isLoading, setIsLoading] = useState(false);
+
+  return (
+    <button
+      type="button"
+      className={classNames('button', 'is-icon-button', 'is-danger', 'is-small', { 'is-loading': isLoading })}
+      style={{ borderRadius: '50%' }}
+      onClick={() => {
+        setIsLoading(true);
+        const body = JSON.stringify({ id: applicationId });
+        // cancel(body).then((res) => res.json());
+        setTimeout(() => {
+          onCancel(applicationId);
+          setIsLoading(false);
+        }, 1000);
+      }}
+    >
+      <span className="icon is-small">
+        <i className="fas fa-times-circle" />
+      </span>
+    </button>
+  );
 };
 
 const Applications = () => {
   const [applications, setApplications] = useState(null);
+  const isLoading = applications === null;
+  const isEmpty = isArray(applications) && size(applications) === 0;
+  const hasResults = isArray(applications) && size(applications) > 0;
 
   useEffect(() => {
     list()
       .then((res) => res.json())
-      .then((data) => { setApplications(data); });
+      // TODO: De la api debería venirme lista vacía en lugar de null
+      .then((data) => (data === null ? setApplications([]) : setApplications(data)));
   }, []);
+
+  const handleCancel = (applicationId) => {
+    const res = applications.map((application) => {
+      if (application.applicationID.S === applicationId) {
+        return { ...application, status: { S: 'Cancelled' } };
+      }
+      return application;
+    });
+    setApplications(res);
+  };
 
   return (
     <>
@@ -28,7 +79,9 @@ const Applications = () => {
                 <div className="column is-8 is-offset-2">
                   <div className="content is-medium">
                     <h1 className="title">Mis solicitudes:</h1>
-                    { applications ? (
+                    { isLoading && <p>Aguarde un momento, estamos buscando sus solicitudes...</p>}
+                    { isEmpty && <p>Aún no cargaste solicitudes.</p>}
+                    { hasResults && (
                       <table className="table">
                         <thead>
                           <th>Insumo</th>
@@ -39,23 +92,18 @@ const Applications = () => {
                         <tbody>
                           { applications.map((e) => (
                             <tr>
+                              {/* TODO: Deberíamos sacar el .S resolviendo esto desde la respuesta de la API */}
                               <td>{e.supply.S}</td>
                               <td>{e.area.S}</td>
                               <td>{statuses[(e.status.S).toLowerCase()]}</td>
-                              <td>
-                                <button type="button" className="button is-icon-button is-danger is-small" style={{ borderRadius: '50%' }}>
-                                  <span className="icon is-small">
-                                    <i className="fas fa-times-circle" />
-                                  </span>
-                                </button>
+                              <td style={{ textAlign: 'center' }}>
+                                {e.status.S === 'Pending' ? <CancelButton applicationId={e.applicationID.S} onCancel={handleCancel} /> : null }
                               </td>
                             </tr>
                           ))}
                         </tbody>
                       </table>
-                    ) : (
-                      <p>Aún no cargaste solicitudes.</p>
-                    ) }
+                    )}
                   </div>
                 </div>
               </div>

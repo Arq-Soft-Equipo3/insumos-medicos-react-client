@@ -31,11 +31,9 @@ const CancelButton = ({ applicationId, onCancel }) => {
       onClick={() => {
         setIsLoading(true);
         const body = JSON.stringify({ id: applicationId });
-        // cancel(body).then((res) => res.json());
-        setTimeout(() => {
-          onCancel(applicationId);
-          setIsLoading(false);
-        }, 1000);
+        // onCancel(applicationId);
+        // setIsLoading(false);
+        cancel(body).then((res) => res.json());
       }}
     >
       <span className="icon is-small">

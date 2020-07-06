@@ -168,7 +168,7 @@ const SignUp = () => {
                           <div className="select is-fullwidth">
                             <select id="city" name="city" required>
                               <option value="">¿En qué localidad se encuentra?</option>
-                              {cities.map(renderOption)}
+                              {cities.map((e) => renderOption(e))}
                             </select>
                           </div>
                           <div className="icon is-small is-left">

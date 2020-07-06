@@ -81,7 +81,7 @@ const ApplicationForm = () => {
                               <div className="select is-fullwidth">
                                 <select id="supply" onChange={handleChange} name="supply" required>
                                   <option value="">¿Qué insumo necesita?</option>
-                                  {supplies.map(renderOption)}
+                                  {supplies.map((e) => renderOption(e))}
                                 </select>
                               </div>
                               <div className="icon is-small is-left">
@@ -96,7 +96,7 @@ const ApplicationForm = () => {
                               <div className="select is-fullwidth">
                                 <select id="medicine" name="medicine" required>
                                   <option value="">¿Qué medicamento necesita?</option>
-                                  {medicines.map(renderOption)}
+                                  {medicines.map((e) => renderOption(e))}
                                 </select>
                               </div>
                               <div className="icon is-small is-left">
@@ -111,7 +111,7 @@ const ApplicationForm = () => {
                               <div className="select is-fullwidth">
                                 <select id="area" name="area" required>
                                   <option value="">¿A que area esta destinado?</option>
-                                  {areas.map(renderOption)}
+                                  {areas.map((e) => renderOption(e))}
                                 </select>
                               </div>
                               <div className="icon is-small is-left">

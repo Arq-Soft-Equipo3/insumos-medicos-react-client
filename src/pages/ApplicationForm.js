@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import {
   Hero, Container, Section, Content, Columns, Message, Form, Button, Icon,
@@ -67,7 +66,11 @@ const ApplicationForm = () => {
                 <Columns.Column size="8" offset="2">
                   <Content size="medium">
                     <h1 className="title">Cargá tu solicitud:</h1>
-                    <p>Completá el siguiente formulario para realizar tu solicitud, un administrador la evaluará y la misma será derivada una organización capaz de generar el insumo requerido.</p>
+                    <p>
+                      Completá el siguiente formulario para realizar tu solicitud, un administrador
+                      la evaluará y la misma será derivada una organización capaz de generar el
+                      insumo requerido.
+                    </p>
                     <Columns>
                       <Columns.Column size="9" offset="1">
                         <form style={{ backgroundColor: 'rgb(247, 247, 247)', padding: 20, borderRadius: 10 }} onSubmit={handleSubmit}>

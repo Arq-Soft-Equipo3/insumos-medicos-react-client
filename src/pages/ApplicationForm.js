@@ -23,7 +23,7 @@ const medicines = ['A', 'B', 'C', 'D'];
 
 const areas = ['Atención de pacientes', 'Terapia Intensiva', 'Técnicos'];
 
-const supplies = ['Máscaras protectoras', 'Barbijos', 'Respiradores', 'Guantes', 'Medicamentos'];
+const supplies = ['Máscaras protectoras', 'Barbijos', 'Respiradores', 'Guantes', 'Medicamento'];
 
 const ApplicationForm = () => {
   const [isMedicine, setIsMedicine] = useState(false);
@@ -51,7 +51,7 @@ const ApplicationForm = () => {
   const enableMedicinePicker = () => setIsMedicine(true);
   const disableMedicinePicker = () => setIsMedicine(false);
 
-  const handleChange = ({ target: { value } }) => (value === 'Medicamentos' ? enableMedicinePicker() : disableMedicinePicker());
+  const handleChange = ({ target: { value } }) => (value === 'Medicamento' ? enableMedicinePicker() : disableMedicinePicker());
 
   return (
     <>

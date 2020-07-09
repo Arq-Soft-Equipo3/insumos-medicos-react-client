@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import isArray from 'lodash.isarray';
 import size from 'lodash.size';
-import { Button, Icon } from 'react-bulma-components';
-import { list, cancel } from '../services/applications';
+import { list } from '../services/applications';
 import Navbar from '../components/Navbar';
+import CancelButton from '../components/CancelButton';
 
 const statuses = {
   pending: 'Pendiente',
   rejected: 'Rechazado',
   approved: 'Aprobado',
-  cancelled: 'Cancelada',
+  canceled: 'Cancelada',
 };
 
 const responseMessages = {
@@ -20,29 +20,7 @@ const responseMessages = {
   500: 'Ocurrió un error en el servidor, intenta nuevamente.',
 };
 
-const CancelButton = ({ applicationId, onCancel }) => {
-  const [isLoading, setIsLoading] = useState(false);
-  const cancelFn = () => {
-    setIsLoading(true);
-    const body = JSON.stringify({ id: applicationId });
-    // onCancel(applicationId);
-    // setIsLoading(false);
-    cancel(body).then((res) => res.json());
-  };
-
-  return (
-    <Button
-      style={{ borderRadius: '50%' }}
-      className="is-icon-button"
-      color="danger"
-      size="small"
-      loading={isLoading}
-      onClick={cancelFn}
-    >
-      <Icon size="small"><i className="fas fa-times-circle" /></Icon>
-    </Button>
-  );
-};
+const supply = (app) => (app.medicine ? app.medicine.S : app.supply.S);
 
 const Applications = () => {
   const [applications, setApplications] = useState(null);
@@ -53,19 +31,12 @@ const Applications = () => {
   useEffect(() => {
     list()
       .then((res) => res.json())
-      // TODO: De la api debería venirme lista vacía en lugar de null
       .then((data) => (data === null ? setApplications([]) : setApplications(data)));
   }, []);
 
-  const handleCancel = (applicationId) => {
-    const res = applications.map((application) => {
-      if (application.applicationID.S === applicationId) {
-        return { ...application, status: { S: 'Cancelled' } };
-      }
-      return application;
-    });
-    setApplications(res);
-  };
+  const cancelApplication = (id) => (app) => (app.applicationID.S === id ? { ...app, status: { S: 'Canceled' } } : app);
+
+  const handleCancel = (id) => setApplications(applications.map(cancelApplication(id)));
 
   return (
     <>
@@ -86,13 +57,12 @@ const Applications = () => {
                           <th>Insumo</th>
                           <th>Área</th>
                           <th>Estado</th>
-                          <th>Cancelar</th>
+                          <th style={{ textAlign: 'center' }}>Acción</th>
                         </thead>
                         <tbody>
                           { applications.map((e) => (
                             <tr>
-                              {/* TODO: Deberíamos sacar el .S resolviendo esto desde la respuesta de la API */}
-                              <td>{e.supply.S}</td>
+                              <td>{supply(e)}</td>
                               <td>{e.area.S}</td>
                               <td>{statuses[(e.status.S).toLowerCase()]}</td>
                               <td style={{ textAlign: 'center' }}>

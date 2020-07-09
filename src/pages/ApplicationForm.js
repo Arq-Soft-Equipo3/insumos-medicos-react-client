@@ -48,7 +48,10 @@ const ApplicationForm = () => {
     setIsLoading(false);
   };
 
-  const handleChange = ({ target: { value } }) => value === 'Medicamentos' && setIsMedicine(true);
+  const enableMedicinePicker = () => setIsMedicine(true);
+  const disableMedicinePicker = () => setIsMedicine(false);
+
+  const handleChange = ({ target: { value } }) => (value === 'Medicamentos' ? enableMedicinePicker() : disableMedicinePicker());
 
   return (
     <>

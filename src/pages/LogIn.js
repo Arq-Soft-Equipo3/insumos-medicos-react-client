@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import {
   Button, Form, Icon, Notification, Columns, Hero, Heading,
 } from 'react-bulma-components';
+import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
 import { logIn } from '../services/auth';
 import Navbar from '../components/Navbar';
@@ -73,6 +74,14 @@ const LogIn = ({ location: { state: { referrer } = {} } = {} }) => {
         </>
       )
   );
+};
+
+LogIn.propTypes = {
+  location: PropTypes.shape({
+    state: PropTypes.shape({
+      referrer: PropTypes.object,
+    }),
+  }),
 };
 
 export default LogIn;

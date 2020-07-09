@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import toLowerCase from 'lodash.lowercase';
-import CancelButton from '../components/CancelButton';
+import CancelButton from './CancelButton';
 
 const supply = (app) => (app.medicine ? app.medicine.S : app.supply.S);
 
@@ -12,7 +12,7 @@ const statuses = {
   canceled: 'Cancelada',
 };
 
-const ApplicationRow = ({ application, handleCancel }) => (
+const UserApplicationRow = ({ application, handleCancel }) => (
   <tr>
     <td>{supply(application)}</td>
     <td>{application.area.S}</td>
@@ -25,7 +25,7 @@ const ApplicationRow = ({ application, handleCancel }) => (
 
 const S = { S: PropTypes.string };
 
-ApplicationRow.propTypes = {
+UserApplicationRow.propTypes = {
   application: PropTypes.shape({
     applicationID: PropTypes.shape(S),
     area: PropTypes.shape(S),
@@ -35,4 +35,4 @@ ApplicationRow.propTypes = {
   handleCancel: PropTypes.func.isRequired,
 };
 
-export default ApplicationRow;
+export default UserApplicationRow;

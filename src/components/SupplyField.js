@@ -3,7 +3,7 @@ import PropType from 'prop-types';
 import { Form, Icon } from 'react-bulma-components';
 import { renderOption } from '../helpers';
 
-const supplies = ['Máscaras protectoras', 'Barbijos', 'Respiradores', 'Guantes', 'Medicamento'];
+const supplies = ['Máscaras protectoras', 'Barbijos', 'Respiradores', 'Guantes', 'Medicamentos'];
 
 const SupplyField = ({ handleChange }) => (
   <Form.Field>

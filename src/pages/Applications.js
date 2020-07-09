@@ -6,7 +6,7 @@ import {
 } from 'react-bulma-components';
 import { list } from '../services/applications';
 import Navbar from '../components/Navbar';
-import ApplicationRow from './ApplicationRow';
+import UserApplicationRow from '../components/UserApplicationRow';
 
 const responseMessages = {
   200: 'Su solicitud ha sido cancelada con éxito.',
@@ -56,7 +56,7 @@ const Applications = () => {
                           </tr>
                         </thead>
                         <tbody>
-                          { applications.map((a) => <ApplicationRow key={a.applicationID.S} handleCancel={handleCancel} application={a} />)}
+                          { applications.map((a) => <UserApplicationRow key={a.applicationID.S} handleCancel={handleCancel} application={a} />)}
                         </tbody>
                       </Table>
                     )}

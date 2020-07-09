@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
-  Hero, Container, Section, Content, Columns, Message, Form, Button, Icon,
+  Hero, Container, Section, Content, Columns, Message, Button,
 } from 'react-bulma-components';
 import { submitApplication } from '../services/applications';
 import Navbar from '../components/Navbar';
-import { getFormData, renderOption } from '../helpers';
+import { getFormData } from '../helpers';
+import MedicineField from '../components/MedicineField';
+import AreaField from '../components/AreaField';
+import SupplyField from '../components/SupplyField';
 
 const responseMessages = {
   200: (
@@ -21,12 +24,6 @@ const responseMessages = {
   500: 'Ocurrió un error en el servidor, intenta nuevamente.',
 };
 
-const medicines = ['A', 'B', 'C', 'D'];
-
-const areas = ['Atención de pacientes', 'Terapia Intensiva', 'Técnicos'];
-
-const supplies = ['Máscaras protectoras', 'Barbijos', 'Respiradores', 'Guantes', 'Medicamento'];
-
 const ApplicationForm = () => {
   const [isMedicine, setIsMedicine] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -37,16 +34,9 @@ const ApplicationForm = () => {
     event.preventDefault();
     setIsLoading(true);
     const body = getFormData(event.target);
-    try {
-      const response = await submitApplication(body);
-      if (!response.ok) {
-        setIsError({ message: responseMessages[response.status] });
-      } else {
-        setIsSuccess({ message: responseMessages[response.status] });
-      }
-    } catch (e) {
-      console.log(e);
-    }
+    submitApplication(body)
+      .then((res) => [res.ok ? setIsSuccess : setIsError, res.status])
+      .then(([fn, status]) => fn({ message: responseMessages[status] }));
     setIsLoading(false);
   };
 
@@ -63,7 +53,7 @@ const ApplicationForm = () => {
           <Container>
             <Section>
               <Columns>
-                <Columns.Column size="8" offset="2">
+                <Columns.Column size={8} offset={2}>
                   <Content size="medium">
                     <h1 className="title">Cargá tu solicitud:</h1>
                     <p>
@@ -72,7 +62,7 @@ const ApplicationForm = () => {
                       insumo requerido.
                     </p>
                     <Columns>
-                      <Columns.Column size="9" offset="1">
+                      <Columns.Column size={9} offset={1}>
                         <form style={{ backgroundColor: 'rgb(247, 247, 247)', padding: 20, borderRadius: 10 }} onSubmit={handleSubmit}>
                           { isError && (
                           <Message color="danger">
@@ -84,44 +74,9 @@ const ApplicationForm = () => {
                               <Message.Body>{isSuccess.message}</Message.Body>
                             </Message>
                           ) }
-                          <Form.Field>
-                            <Form.Label htmlFor="supply">Insumo:</Form.Label>
-                            <Form.Control iconLeft>
-                              <div className="select is-fullwidth">
-                                <select id="supply" onChange={handleChange} name="supply" required>
-                                  <option value="">¿Qué insumo necesita?</option>
-                                  {supplies.map((e) => renderOption(e))}
-                                </select>
-                              </div>
-                              <Icon size="small" align="left"><i className="fas fa-users" /></Icon>
-                            </Form.Control>
-                          </Form.Field>
-                          { isMedicine && (
-                          <Form.Field>
-                            <Form.Label htmlFor="medicine">Medicamento:</Form.Label>
-                            <Form.Control iconLeft>
-                              <div className="select is-fullwidth">
-                                <select id="medicine" name="medicine" required>
-                                  <option value="">¿Qué medicamento necesita?</option>
-                                  {medicines.map((e) => renderOption(e))}
-                                </select>
-                              </div>
-                              <Icon size="small" align="left"><i className="fas fa-medkit" /></Icon>
-                            </Form.Control>
-                          </Form.Field>
-                          ) }
-                          <Form.Field>
-                            <Form.Label htmlFor="area">Área:</Form.Label>
-                            <Form.Control iconLeft>
-                              <div className="select is-fullwidth">
-                                <select id="area" name="area" required>
-                                  <option value="">¿A que area esta destinado?</option>
-                                  {areas.map((e) => renderOption(e))}
-                                </select>
-                              </div>
-                              <Icon size="small" align="left"><i className="fas fa-users" /></Icon>
-                            </Form.Control>
-                          </Form.Field>
+                          <SupplyField handleChange={handleChange} />
+                          { isMedicine && <MedicineField /> }
+                          <AreaField />
                           <Button submit fullwidth outlined size="medium" color="info" loading={isLoading}>Enviar</Button>
                         </form>
                       </Columns.Column>

@@ -6,6 +6,6 @@ const getFormData = (target) => {
   return JSON.stringify(formEntries);
 };
 
-const renderOption = (value, label = value) => <option value={value}>{label}</option>;
+const renderOption = (value, label = value, i) => <option key={i} value={value}>{label}</option>;
 
 export { getFormData, renderOption };

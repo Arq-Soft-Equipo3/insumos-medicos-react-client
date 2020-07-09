@@ -14,7 +14,7 @@ const Home = () => (
         <Container>
           <Section>
             <Columns>
-              <Columns.Column size="8" offset="2">
+              <Columns.Column size={8} offset={2}>
                 <Content size="medium">
                   <h1 className="title">Bienvenido!</h1>
                   <p>
@@ -27,7 +27,7 @@ const Home = () => (
             </Columns>
           </Section>
           <Columns>
-            <Columns.Column size="8" offset="2">
+            <Columns.Column size={8} offset={2}>
               <figure className="image is-16by9">
                 <img src={banner} alt="insumos médicos" />
               </figure>

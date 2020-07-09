@@ -46,7 +46,7 @@ const LogIn = (props) => {
           <Navbar />
           <Hero color="primary" className="flex-1">
             <Hero.Body>
-              <Heading size="3" className="has-text-centered">Iniciar Sesión</Heading>
+              <Heading size={3} className="has-text-centered">Iniciar Sesión</Heading>
               <Columns centered>
                 <Columns.Column size="one-third">
                   <Notification color="light">

@@ -70,7 +70,7 @@ const SignUp = () => {
           <Navbar />
           <Hero color="primary" className="flex-1">
             <Hero.Body>
-              <Heading size="3" className="has-text-centered">Registrarme</Heading>
+              <Heading size={3} className="has-text-centered">Registrarme</Heading>
               <Columns centered>
                 <Columns.Column size="one-third">
                   <Notification color="light">
@@ -128,7 +128,7 @@ const SignUp = () => {
                           <div className="select is-fullwidth">
                             <select id="city" name="city" required>
                               <option value="">¿En qué localidad se encuentra?</option>
-                              {cities.map((e) => renderOption(e))}
+                              {cities.map((e, i) => renderOption(e, e, i))}
                             </select>
                           </div>
                           <Icon size="small" align="left"><i className="fas fa-map-marker" /></Icon>

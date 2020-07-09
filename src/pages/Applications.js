@@ -40,7 +40,7 @@ const Applications = () => {
           <Container>
             <Section>
               <Columns>
-                <Columns.Column size="8" offset="2">
+                <Columns.Column size={8} offset={2}>
                   <Content size="medium">
                     <h1 className="title">Mis solicitudes:</h1>
                     { isLoading && <p>Aguarde un momento, estamos buscando sus solicitudes...</p>}
@@ -48,13 +48,15 @@ const Applications = () => {
                     { hasResults && (
                       <Table>
                         <thead>
-                          <th>Insumo</th>
-                          <th>Área</th>
-                          <th>Estado</th>
-                          <th style={{ textAlign: 'center' }}>Acción</th>
+                          <tr>
+                            <th>Insumo</th>
+                            <th>Área</th>
+                            <th>Estado</th>
+                            <th style={{ textAlign: 'center' }}>Acción</th>
+                          </tr>
                         </thead>
                         <tbody>
-                          { applications.map((a) => <ApplicationRow handleCancel={handleCancel} application={a} />)}
+                          { applications.map((a) => <ApplicationRow key={a.applicationID.S} handleCancel={handleCancel} application={a} />)}
                         </tbody>
                       </Table>
                     )}

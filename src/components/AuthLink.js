@@ -4,7 +4,7 @@ import { Button } from 'react-bulma-components';
 import { isAuthenticated, logout } from '../services/auth';
 
 const AuthLink = withRouter(({ history }) => (isAuthenticated()
-  ? <Button state="primary" onClick={() => { logout(); history.push('/'); }}>Cerrar sesión</Button>
+  ? <Button color="primary" onClick={() => { logout(); history.push('/'); }}>Cerrar sesión</Button>
   : (
     <>
       <Link to="/signup" className="button is-primary"><strong>Registrarme</strong></Link>

@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
+import {
+  Hero, Container, Section, Content, Columns, Message, Form, Button, Icon,
+} from 'react-bulma-components';
 import { submitApplication } from '../services/applications';
 import Navbar from '../components/Navbar';
 import { getFormData, renderOption } from '../helpers';
@@ -56,88 +59,77 @@ const ApplicationForm = () => {
   return (
     <>
       <Navbar />
-      <section className="hero">
-        <div className="hero-body">
-          <div className="container">
-            <section className="section">
-              <div className="columns">
-                <div className="column is-8 is-offset-2">
-                  <div className="content is-medium">
+      <Hero>
+        <Hero.Body>
+          <Container>
+            <Section>
+              <Columns>
+                <Columns.Column size="8" offset="2">
+                  <Content size="medium">
                     <h1 className="title">Cargá tu solicitud:</h1>
                     <p>Completá el siguiente formulario para realizar tu solicitud, un administrador la evaluará y la misma será derivada una organización capaz de generar el insumo requerido.</p>
-                    <div className="columns">
-                      <div className="column is-9 is-offset-1">
+                    <Columns>
+                      <Columns.Column size="9" offset="1">
                         <form style={{ backgroundColor: 'rgb(247, 247, 247)', padding: 20, borderRadius: 10 }} onSubmit={handleSubmit}>
-                          {isError && (
-                          <div className="message is-danger">
-                            <div className="message-body">{isError.message}</div>
-                          </div>
-                          )}
-                          {isSuccess && (
-                            <div className="message is-success">
-                              <div className="message-body">{isSuccess.message}</div>
-                            </div>
-                          )}
-                          <div className="field">
-                            <label className="label" htmlFor="supply">Insumo:</label>
-                            <div className="control has-icons-left">
+                          { isError && (
+                          <Message color="danger">
+                            <Message.Body>{isError.message}</Message.Body>
+                          </Message>
+                          ) }
+                          { isSuccess && (
+                            <Message color="success">
+                              <Message.Body>{isSuccess.message}</Message.Body>
+                            </Message>
+                          ) }
+                          <Form.Field>
+                            <Form.Label htmlFor="supply">Insumo:</Form.Label>
+                            <Form.Control iconLeft>
                               <div className="select is-fullwidth">
                                 <select id="supply" onChange={handleChange} name="supply" required>
                                   <option value="">¿Qué insumo necesita?</option>
                                   {supplies.map((e) => renderOption(e))}
                                 </select>
                               </div>
-                              <div className="icon is-small is-left">
-                                <i className="fas fa-medkit" />
-                              </div>
-                            </div>
-                          </div>
+                              <Icon size="small" align="left"><i className="fas fa-users" /></Icon>
+                            </Form.Control>
+                          </Form.Field>
                           { isMedicine && (
-                          <div className="field">
-                            <label className="label" htmlFor="medicine">Medicamento:</label>
-                            <div className="control has-icons-left">
+                          <Form.Field>
+                            <Form.Label htmlFor="medicine">Medicamento:</Form.Label>
+                            <Form.Control iconLeft>
                               <div className="select is-fullwidth">
                                 <select id="medicine" name="medicine" required>
                                   <option value="">¿Qué medicamento necesita?</option>
                                   {medicines.map((e) => renderOption(e))}
                                 </select>
                               </div>
-                              <div className="icon is-small is-left">
-                                <i className="fas fa-medkit" />
-                              </div>
-                            </div>
-                          </div>
+                              <Icon size="small" align="left"><i className="fas fa-medkit" /></Icon>
+                            </Form.Control>
+                          </Form.Field>
                           ) }
-                          <div className="field">
-                            <label className="label" htmlFor="area">Área:</label>
-                            <div className="control has-icons-left">
+                          <Form.Field>
+                            <Form.Label htmlFor="area">Área:</Form.Label>
+                            <Form.Control iconLeft>
                               <div className="select is-fullwidth">
                                 <select id="area" name="area" required>
                                   <option value="">¿A que area esta destinado?</option>
                                   {areas.map((e) => renderOption(e))}
                                 </select>
                               </div>
-                              <div className="icon is-small is-left">
-                                <i className="fas fa-users" />
-                              </div>
-                            </div>
-                          </div>
-                          <button
-                            type="submit"
-                            className={classNames('button', 'is-fullwidth', 'is-info', 'is-outlined', 'is-medium', { 'is-loading': isLoading })}
-                          >
-                            Enviar
-                          </button>
+                              <Icon size="small" align="left"><i className="fas fa-users" /></Icon>
+                            </Form.Control>
+                          </Form.Field>
+                          <Button submit fullwidth outlined size="medium" color="info" loading={isLoading}>Enviar</Button>
                         </form>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </section>
-          </div>
-        </div>
-      </section>
+                      </Columns.Column>
+                    </Columns>
+                  </Content>
+                </Columns.Column>
+              </Columns>
+            </Section>
+          </Container>
+        </Hero.Body>
+      </Hero>
     </>
   );
 };

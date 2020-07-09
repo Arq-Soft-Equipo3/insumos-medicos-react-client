@@ -1,16 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import isArray from 'lodash.isarray';
 import size from 'lodash.size';
+import {
+  Hero, Section, Columns, Container, Content, Table,
+} from 'react-bulma-components';
 import { list } from '../services/applications';
 import Navbar from '../components/Navbar';
-import CancelButton from '../components/CancelButton';
-
-const statuses = {
-  pending: 'Pendiente',
-  rejected: 'Rechazado',
-  approved: 'Aprobado',
-  canceled: 'Cancelada',
-};
+import ApplicationRow from './ApplicationRow';
 
 const responseMessages = {
   200: 'Su solicitud ha sido cancelada con éxito.',
@@ -19,8 +15,6 @@ const responseMessages = {
   422: 'Revisá los datos ingresados y volvé a intentar.',
   500: 'Ocurrió un error en el servidor, intenta nuevamente.',
 };
-
-const supply = (app) => (app.medicine ? app.medicine.S : app.supply.S);
 
 const Applications = () => {
   const [applications, setApplications] = useState(null);
@@ -41,18 +35,18 @@ const Applications = () => {
   return (
     <>
       <Navbar />
-      <section className="hero">
-        <div className="hero-body">
-          <div className="container">
-            <section className="section">
-              <div className="columns">
-                <div className="column is-8 is-offset-2">
-                  <div className="content is-medium">
+      <Hero>
+        <Hero.Body>
+          <Container>
+            <Section>
+              <Columns>
+                <Columns.Column size="8" offset="2">
+                  <Content size="medium">
                     <h1 className="title">Mis solicitudes:</h1>
                     { isLoading && <p>Aguarde un momento, estamos buscando sus solicitudes...</p>}
                     { isEmpty && <p>Aún no cargaste solicitudes.</p>}
                     { hasResults && (
-                      <table className="table">
+                      <Table>
                         <thead>
                           <th>Insumo</th>
                           <th>Área</th>
@@ -60,26 +54,17 @@ const Applications = () => {
                           <th style={{ textAlign: 'center' }}>Acción</th>
                         </thead>
                         <tbody>
-                          { applications.map((e) => (
-                            <tr>
-                              <td>{supply(e)}</td>
-                              <td>{e.area.S}</td>
-                              <td>{statuses[(e.status.S).toLowerCase()]}</td>
-                              <td style={{ textAlign: 'center' }}>
-                                {e.status.S === 'Pending' ? <CancelButton applicationId={e.applicationID.S} onCancel={handleCancel} /> : null }
-                              </td>
-                            </tr>
-                          ))}
+                          { applications.map((a) => <ApplicationRow handleCancel={handleCancel} application={a} />)}
                         </tbody>
-                      </table>
+                      </Table>
                     )}
-                  </div>
-                </div>
-              </div>
-            </section>
-          </div>
-        </div>
-      </section>
+                  </Content>
+                </Columns.Column>
+              </Columns>
+            </Section>
+          </Container>
+        </Hero.Body>
+      </Hero>
     </>
   );
 };

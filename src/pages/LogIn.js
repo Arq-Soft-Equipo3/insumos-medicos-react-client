@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import {
-  Button, Form, Icon, Message, Notification, Columns, Hero, Heading,
+  Button, Form, Icon, Notification, Columns, Hero, Heading,
 } from 'react-bulma-components';
+import { toast } from 'react-toastify';
 import { logIn } from '../services/auth';
 import Navbar from '../components/Navbar';
 import { getFormData } from '../helpers';
@@ -16,8 +17,6 @@ const errorMessages = {
 const LogIn = (props) => {
   const [redirect, setRedirect] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState(false);
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     setIsLoading(true);
@@ -25,7 +24,7 @@ const LogIn = (props) => {
     try {
       const response = await logIn(body);
       if (!response.ok) {
-        setIsError({ message: errorMessages[response.status] });
+        toast.error(errorMessages[response.status]);
       } else {
         const { token } = await response.json();
         localStorage.setItem('token', token);
@@ -51,11 +50,6 @@ const LogIn = (props) => {
                 <Columns.Column size="one-third">
                   <Notification color="light">
                     <form onSubmit={handleSubmit}>
-                      { isError && (
-                      <Message color="danger">
-                        <Message.Body>{isError.message}</Message.Body>
-                      </Message>
-                      ) }
                       <Form.Field>
                         <Form.Label htmlFor="email">Email:</Form.Label>
                         <Form.Control iconLeft>

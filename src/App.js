@@ -4,10 +4,13 @@ import {
   Switch,
   Route,
 } from 'react-router-dom';
+
+import { ToastContainer } from 'react-toastify';
 import {
   Home, SignUp, LogIn, Applications, ApplicationForm,
 } from './pages';
 import PrivateRoute from './components/PrivateRoute';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
@@ -21,6 +24,7 @@ function App() {
           <PrivateRoute path="/solicitud" component={ApplicationForm} />
           <PrivateRoute path="/mis-solicitudes" component={Applications} />
         </Switch>
+        <ToastContainer position="bottom-right" />
       </div>
     </Router>
   );

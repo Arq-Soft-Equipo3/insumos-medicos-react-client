@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
-  Hero, Container, Section, Content, Columns, Message, Button,
+  Hero, Container, Section, Content, Columns, Button,
 } from 'react-bulma-components';
+import { toast } from 'react-toastify';
 import { submitApplication } from '../services/applications';
 import Navbar from '../components/Navbar';
 import { getFormData } from '../helpers';
@@ -27,17 +28,15 @@ const responseMessages = {
 const ApplicationForm = () => {
   const [isMedicine, setIsMedicine] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     setIsLoading(true);
     const body = getFormData(event.target);
     submitApplication(body)
-      .then((res) => [res.ok ? setIsSuccess : setIsError, res.status])
-      .then(([fn, status]) => fn({ message: responseMessages[status] }));
-    setIsLoading(false);
+      .then(({ ok, status }) => [ok ? toast.success : toast.error, responseMessages[status]])
+      .then(([toastFn, message]) => toastFn(message))
+      .then(() => setIsLoading(false));
   };
 
   const enableMedicinePicker = () => setIsMedicine(true);
@@ -64,16 +63,6 @@ const ApplicationForm = () => {
                     <Columns>
                       <Columns.Column size={9} offset={1}>
                         <form style={{ backgroundColor: 'rgb(247, 247, 247)', padding: 20, borderRadius: 10 }} onSubmit={handleSubmit}>
-                          { isError && (
-                          <Message color="danger">
-                            <Message.Body>{isError.message}</Message.Body>
-                          </Message>
-                          ) }
-                          { isSuccess && (
-                            <Message color="success">
-                              <Message.Body>{isSuccess.message}</Message.Body>
-                            </Message>
-                          ) }
                           <SupplyField handleChange={handleChange} />
                           { isMedicine && <MedicineField /> }
                           <AreaField />

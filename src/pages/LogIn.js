@@ -14,32 +14,29 @@ const errorMessages = {
   500: 'Ocurrió un error en el servidor, intenta nuevamente.',
 };
 
-const LogIn = (props) => {
+const LogIn = ({ location: { state: { referrer } = {} } = {} }) => {
   const [redirect, setRedirect] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     setIsLoading(true);
     const body = getFormData(event.target);
-    try {
-      const response = await logIn(body);
-      if (!response.ok) {
-        toast.error(errorMessages[response.status]);
-      } else {
-        const { token } = await response.json();
-        localStorage.setItem('token', token);
-        setRedirect(true);
+    logIn(body).then((res) => {
+      if (!res.ok) {
+        throw errorMessages[res.status];
       }
-    } catch (e) {
-      console.log(e);
-    }
-    setIsLoading(false);
+
+      return res.json();
+    }).then(({ token }) => {
+      localStorage.setItem('token', token);
+      setRedirect(true);
+    }).catch(toast.error)
+      .finally(() => setIsLoading(false));
   };
 
-  const { referrer } = props.location.state || { referrer: { pathname: '/' } };
-
   return (
-    redirect ? <Redirect to={referrer} />
+    redirect ? <Redirect to={referrer || { referrer: { pathname: '/' } }} />
       : (
         <>
           <Navbar />

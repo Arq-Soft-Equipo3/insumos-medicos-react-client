@@ -1,4 +1,4 @@
-const submitApplication = async (body) => fetch(`${process.env.REACT_APP_API_HOST}/applications`, {
+const submitApplication = (body) => fetch(`${process.env.REACT_APP_API_HOST}/applications`, {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',

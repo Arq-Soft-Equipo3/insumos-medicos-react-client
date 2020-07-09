@@ -48,19 +48,17 @@ const SignUp = () => {
     event.preventDefault();
     setIsLoading(true);
     const body = getFormData(event.target);
-    try {
-      const response = await signUp(body);
-      if (!response.ok) {
-        toast.error(errorMessages[response.status]);
-      } else {
-        const { token } = await response.json();
-        localStorage.setItem('token', token);
-        setRedirect(true);
+    signUp(body).then((res) => {
+      if (!res.ok) {
+        throw errorMessages[res.status];
       }
-    } catch (e) {
-      console.log(e);
-    }
-    setIsLoading(false);
+
+      return res.json();
+    }).then(({ token }) => {
+      localStorage.setItem('token', token);
+      setRedirect(true);
+    }).catch(toast.error)
+      .finally(() => setIsLoading(false));
   };
 
   return (

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
-import classNames from 'classnames';
+import {
+  Button, Form, Icon, Message, Notification, Columns, Hero, Heading,
+} from 'react-bulma-components';
 import { logIn } from '../services/auth';
 import Navbar from '../components/Navbar';
 import { getFormData } from '../helpers';
@@ -42,44 +44,41 @@ const LogIn = (props) => {
       : (
         <>
           <Navbar />
-          <div className="hero is-primary flex-1">
-            <div className="hero-body">
-              <h1 className="title has-text-centered is-size-3">Iniciar Sesión</h1>
-              <div className="columns is-centered">
-                <div className="column is-one-third">
-                  <div className="notification is-light">
+          <Hero color="primary" className="flex-1">
+            <Hero.Body>
+              <Heading size="3" className="has-text-centered">Iniciar Sesión</Heading>
+              <Columns centered>
+                <Columns.Column size="one-third">
+                  <Notification color="light">
                     <form onSubmit={handleSubmit}>
                       { isError && (
-                      <div className="message is-danger">
-                        <div className="message-body">{isError.message}</div>
-                      </div>
+                      <Message color="danger">
+                        <Message.Body>{isError.message}</Message.Body>
+                      </Message>
                       ) }
-                      <div className="field">
-                        <label className="label" htmlFor="email">Email</label>
-                        <p className="control has-icons-left has-icons-right">
+                      <Form.Field>
+                        <Form.Label htmlFor="email">Email:</Form.Label>
+                        <Form.Control iconLeft>
+                          {/* <Form.Input id="email" name="email" type="email" placeholder="Ingresá tu email" required /> */}
                           <input id="email" name="email" className="input" type="email" placeholder="Ingresá tu email" required />
-                          <span className="icon is-small is-left"><i className="fas fa-envelope" /></span>
-                        </p>
-                      </div>
-                      <div className="field">
-                        <label className="label" htmlFor="password">Password:</label>
-                        <p className="control has-icons-left">
+                          <Icon size="small" align="left"><i className="fas fa-envelope" /></Icon>
+                        </Form.Control>
+                      </Form.Field>
+                      <Form.Field>
+                        <Form.Label htmlFor="password">Password:</Form.Label>
+                        <Form.Control iconLeft>
+                          {/* <Form.Input id="password" name="password" type="password" placeholder="Ingresá tu password" required /> */}
                           <input id="password" name="password" className="input" type="password" placeholder="Ingresá tu password" required />
-                          <span className="icon is-small is-left"><i className="fas fa-lock" /></span>
-                        </p>
-                      </div>
-                      <button
-                        type="submit"
-                        className={classNames('button', 'is-fullwidth', 'is-info', 'is-outlined', 'is-medium', { 'is-loading': isLoading })}
-                      >
-                        Iniciar sesión
-                      </button>
+                          <Icon size="small" align="left"><i className="fas fa-lock" /></Icon>
+                        </Form.Control>
+                      </Form.Field>
+                      <Button submit fullwidth outlined size="medium" color="info" loading={isLoading}>Iniciar sesión</Button>
                     </form>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+                  </Notification>
+                </Columns.Column>
+              </Columns>
+            </Hero.Body>
+          </Hero>
         </>
       )
   );

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import isArray from 'lodash.isarray';
 import size from 'lodash.size';
-import classNames from 'classnames';
+import { Button, Icon } from 'react-bulma-components';
 import { list, cancel } from '../services/applications';
 import Navbar from '../components/Navbar';
 
@@ -22,24 +22,25 @@ const responseMessages = {
 
 const CancelButton = ({ applicationId, onCancel }) => {
   const [isLoading, setIsLoading] = useState(false);
+  const cancelFn = () => {
+    setIsLoading(true);
+    const body = JSON.stringify({ id: applicationId });
+    // onCancel(applicationId);
+    // setIsLoading(false);
+    cancel(body).then((res) => res.json());
+  };
 
   return (
-    <button
-      type="button"
-      className={classNames('button', 'is-icon-button', 'is-danger', 'is-small', { 'is-loading': isLoading })}
+    <Button
       style={{ borderRadius: '50%' }}
-      onClick={() => {
-        setIsLoading(true);
-        const body = JSON.stringify({ id: applicationId });
-        // onCancel(applicationId);
-        // setIsLoading(false);
-        cancel(body).then((res) => res.json());
-      }}
+      className="is-icon-button"
+      color="danger"
+      size="small"
+      loading={isLoading}
+      onClick={cancelFn}
     >
-      <span className="icon is-small">
-        <i className="fas fa-times-circle" />
-      </span>
-    </button>
+      <Icon size="small"><i className="fas fa-times-circle" /></Icon>
+    </Button>
   );
 };
 

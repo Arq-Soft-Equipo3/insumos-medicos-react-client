@@ -23,16 +23,12 @@ const Home = () => (
                       : 'Registrate en nuestro sistema para poder cargar tu solicitud de insumos que nosotros nos encargaremos de derivarla a la organización correspondiente.'}
                   </p>
                 </Content>
+                <figure className="image is-16by9">
+                  <img src={banner} alt="insumos médicos" />
+                </figure>
               </Columns.Column>
             </Columns>
           </Section>
-          <Columns>
-            <Columns.Column size={8} offset={2}>
-              <figure className="image is-16by9">
-                <img src={banner} alt="insumos médicos" />
-              </figure>
-            </Columns.Column>
-          </Columns>
         </Container>
       </Hero.Body>
     </Hero>

@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import toLowerCase from 'lodash.lowercase';
-import CancelButton from './CancelButton';
+import ApproveButton from './ApproveButton';
+import RejectButton from './RejectButton';
 
 const supply = (app) => (app.medicine ? app.medicine.S : app.supply.S);
 
@@ -12,13 +13,25 @@ const statuses = {
   canceled: 'Cancelada',
 };
 
-const AdminApplicationRow = ({ application, handleCancel }) => (
+const AdminApplicationRow = ({
+  application, handleApprove, handleReject, handleSelect,
+}) => (
   <tr>
+    <td>{application.filler.S}</td>
     <td>{supply(application)}</td>
     <td>{application.area.S}</td>
     <td>{statuses[toLowerCase(application.status.S)]}</td>
     <td style={{ textAlign: 'center' }}>
-      {application.status.S === 'Pending' ? <CancelButton applicationId={application.applicationID.S} onCancel={handleCancel} /> : null }
+      <ApproveButton handleClick={() => {
+        handleSelect(application.applicationID.S);
+        handleApprove();
+      }}
+      />
+      <RejectButton handleClick={() => {
+        handleSelect(application.applicationID.S);
+        handleReject();
+      }}
+      />
     </td>
   </tr>
 );
@@ -31,8 +44,10 @@ AdminApplicationRow.propTypes = {
     area: PropTypes.shape(S),
     status: PropTypes.shape(S),
     supply: PropTypes.shape(S),
+    filler: PropTypes.shape(S),
   }).isRequired,
-  handleCancel: PropTypes.func.isRequired,
+  handleApprove: PropTypes.func.isRequired,
+  handleReject: PropTypes.func.isRequired,
 };
 
 export default AdminApplicationRow;

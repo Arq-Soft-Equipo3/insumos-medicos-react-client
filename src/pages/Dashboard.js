@@ -6,9 +6,14 @@ import isArray from 'lodash.isarray';
 import size from 'lodash.size';
 import Navbar from '../components/Navbar';
 import AdminApplicationRow from '../components/AdminApplicationRow';
+import ApproveModal from '../components/ApproveModal';
+import RejectModal from '../components/RejectModal';
 
 const Dashboard = () => {
   const [applications, setApplications] = useState(null);
+  const [approveModal, setApproveModal] = useState(false);
+  const [rejectModal, setRejectModal] = useState(false);
+  const [selectedApplication, setSelectedApplication] = useState(null);
   const isLoading = applications === null;
   const isEmpty = isArray(applications) && size(applications) === 0;
   const hasResults = isArray(applications) && size(applications) > 0;
@@ -45,9 +50,13 @@ const Dashboard = () => {
           <Container>
             <Section>
               <Columns>
-                <Columns.Column size={8} offset={2}>
+                <Columns.Column size={10} offset={1}>
                   <Content size="medium">
-                    <h1 className="title">Dashboard:</h1>
+                    <h1 className="title">
+                      Dashboard:
+                      {' '}
+                      {selectedApplication}
+                    </h1>
                     { isLoading && <p>Aguarde un momento, estamos buscando las solicitudes...</p>}
                     { isEmpty && <p>Aún no hay solicitudes cargadas.</p>}
                     { hasResults && (
@@ -62,7 +71,15 @@ const Dashboard = () => {
                         </tr>
                       </thead>
                       <tbody>
-                        { applications.map((a) => <AdminApplicationRow key={a.applicationID.S} handleCancel={() => {}} application={a} />)}
+                        { applications.map((a) => (
+                          <AdminApplicationRow
+                            handleSelect={setSelectedApplication}
+                            handleApprove={() => { setApproveModal(true); }}
+                            handleReject={() => { setRejectModal(true); }}
+                            key={a.applicationID.S}
+                            application={a}
+                          />
+                        ))}
                       </tbody>
                     </Table>
                     )}
@@ -73,6 +90,8 @@ const Dashboard = () => {
           </Container>
         </Hero.Body>
       </Hero>
+      <ApproveModal applicationId={selectedApplication} show={approveModal} handleClose={() => { setApproveModal(false); setSelectedApplication(null); }} />
+      <RejectModal applicationId={selectedApplication} show={rejectModal} handleClose={() => { setRejectModal(false); setSelectedApplication(null); }} />
     </>
   );
 };

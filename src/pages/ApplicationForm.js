@@ -61,7 +61,7 @@ const ApplicationForm = () => {
                       insumo requerido.
                     </p>
                     <Columns>
-                      <Columns.Column size={9} offset={1}>
+                      <Columns.Column size={10} offset={1}>
                         <form style={{ backgroundColor: 'rgb(247, 247, 247)', padding: 20, borderRadius: 10 }} onSubmit={handleSubmit}>
                           <SupplyField handleChange={handleChange} />
                           { isMedicine && <MedicineField /> }

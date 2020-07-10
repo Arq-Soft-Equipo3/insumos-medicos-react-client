@@ -25,7 +25,7 @@ const Applications = () => {
   useEffect(() => {
     list()
       .then((res) => res.json())
-      .then((data) => (data === null ? setApplications([]) : setApplications(data)));
+      .then((data) => (setApplications(data)));
   }, []);
 
   const cancelApplication = (id) => (app) => (app.applicationID.S === id ? { ...app, status: { S: 'Canceled' } } : app);
@@ -40,7 +40,7 @@ const Applications = () => {
           <Container>
             <Section>
               <Columns>
-                <Columns.Column size={8} offset={2}>
+                <Columns.Column size={10} offset={1}>
                   <Content size="medium">
                     <h1 className="title">Mis solicitudes:</h1>
                     { isLoading && <p>Aguarde un momento, estamos buscando sus solicitudes...</p>}
@@ -52,6 +52,7 @@ const Applications = () => {
                             <th>Insumo</th>
                             <th>Área</th>
                             <th>Estado</th>
+                            <th>Creación</th>
                             <th style={{ textAlign: 'center' }}>Acción</th>
                           </tr>
                         </thead>

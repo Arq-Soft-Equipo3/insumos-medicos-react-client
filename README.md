@@ -1,3 +1,5 @@
+[![Arq-Soft-Equipo3](https://circleci.com/gh/Arq-Soft-Equipo3/insumos-medicos-react-client.svg?style=svg)](https://app.circleci.com/pipelines/github/Arq-Soft-Equipo3)
+
 ## Insumos-medicos-react-client
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

@@ -42,7 +42,7 @@ const ApplicationForm = () => {
   const enableMedicinePicker = () => setIsMedicine(true);
   const disableMedicinePicker = () => setIsMedicine(false);
 
-  const handleChange = ({ target: { value } }) => (value === 'Medicamento' ? enableMedicinePicker() : disableMedicinePicker());
+  const handleChange = ({ target: { value } }) => (value === 'Medicamentos' ? enableMedicinePicker() : disableMedicinePicker());
 
   return (
     <>

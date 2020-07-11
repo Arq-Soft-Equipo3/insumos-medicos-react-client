@@ -6,10 +6,13 @@ import {
 import { reject } from '../services/applications';
 import { getFormData } from '../helpers';
 
-const RejectModal = ({ applicationId: id, show, handleClose }) => {
+const RejectModal = ({ application, show, handleClose }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
-    const body = getFormData(event.target, { id });
+    const body = getFormData(event.target, {
+      id: application.applicationID.S,
+      filler: application.filler.S,
+    });
     reject(body);
   };
   return (
@@ -21,9 +24,9 @@ const RejectModal = ({ applicationId: id, show, handleClose }) => {
         <form onSubmit={handleSubmit}>
           <Modal.Card.Body>
             <Form.Field>
-              <Form.Label htmlFor="rejection_reason">Ingrese el motivo por el cual desea rechazar la solicitud:</Form.Label>
+              <Form.Label htmlFor="motive">Ingrese el motivo por el cual desea rechazar la solicitud:</Form.Label>
               <Form.Control>
-                <textarea id="rejection_reason" name="rejection_reason" className="textarea" />
+                <textarea id="motive" name="motive" className="textarea" />
               </Form.Control>
             </Form.Field>
           </Modal.Card.Body>

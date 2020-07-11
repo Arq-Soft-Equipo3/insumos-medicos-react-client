@@ -3,8 +3,11 @@ import PropTypes from 'prop-types';
 import toLowerCase from 'lodash.lowercase';
 import ApproveButton from './ApproveButton';
 import RejectButton from './RejectButton';
+import timeAgo from '../helpers/time-ago';
 
 const supply = (app) => (app.medicine ? app.medicine.S : app.supply.S);
+
+const isPending = (application) => application.status.S === 'Pending';
 
 const statuses = {
   pending: 'Pendiente',
@@ -15,26 +18,23 @@ const statuses = {
 
 const AdminApplicationRow = ({
   application, handleApprove, handleReject, handleSelect,
-}) => (
-  <tr>
-    <td>{application.filler.S}</td>
-    <td>{supply(application)}</td>
-    <td>{application.area.S}</td>
-    <td>{statuses[toLowerCase(application.status.S)]}</td>
-    <td style={{ textAlign: 'center' }}>
-      <ApproveButton handleClick={() => {
-        handleSelect(application.applicationID.S);
-        handleApprove();
-      }}
-      />
-      <RejectButton handleClick={() => {
-        handleSelect(application.applicationID.S);
-        handleReject();
-      }}
-      />
-    </td>
-  </tr>
-);
+}) => {
+  const createdAt = new Date(application.timeStamp.S);
+  createdAt.setHours(createdAt.getHours() - 3);
+  return (
+    <tr>
+      <td>{application.filler.S}</td>
+      <td>{supply(application)}</td>
+      <td>{application.area.S}</td>
+      <td>{statuses[toLowerCase(application.status.S)]}</td>
+      <td>{timeAgo.format(createdAt)}</td>
+      <td style={{ textAlign: 'center' }}>
+        {isPending(application) && <ApproveButton handleClick={() => { handleSelect(application); handleApprove(); }} />}
+        {isPending(application) && <RejectButton handleClick={() => { handleSelect(application); handleReject(); }} />}
+      </td>
+    </tr>
+  );
+};
 
 const S = { S: PropTypes.string };
 
@@ -48,6 +48,7 @@ AdminApplicationRow.propTypes = {
   }).isRequired,
   handleApprove: PropTypes.func.isRequired,
   handleReject: PropTypes.func.isRequired,
+  handleSelect: PropTypes.func.isRequired,
 };
 
 export default AdminApplicationRow;

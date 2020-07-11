@@ -11,7 +11,6 @@ import {
 } from './pages';
 import PrivateRoute from './components/PrivateRoute';
 import 'react-toastify/dist/ReactToastify.css';
-import Dashboard from './pages/Dashboard';
 
 function App() {
   return (
@@ -24,7 +23,6 @@ function App() {
           <Route path="/logout" component={LogIn} />
           <PrivateRoute path="/solicitud" component={ApplicationForm} />
           <PrivateRoute path="/mis-solicitudes" component={Applications} />
-          <PrivateRoute path="/dashboard" component={Dashboard} />
         </Switch>
         <ToastContainer position="bottom-right" />
       </div>

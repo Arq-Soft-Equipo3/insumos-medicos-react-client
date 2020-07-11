@@ -1,14 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import toLowerCase from 'lodash.lowercase';
-import TimeAgo from 'javascript-time-ago';
-
-import es from 'javascript-time-ago/locale/es';
 import CancelButton from './CancelButton';
-
-TimeAgo.addLocale(es);
-
-const timeAgo = new TimeAgo('es-ES');
+import timeAgo from '../helpers/time-ago';
 
 const supply = (app) => (app.medicine ? app.medicine.S : app.supply.S);
 
@@ -20,9 +14,9 @@ const statuses = {
 };
 
 const UserApplicationRow = ({ application, handleCancel }) => {
-  // FIXME: Solucionar esto desde el server
   const createdAt = new Date(application.timeStamp.S);
   createdAt.setHours(createdAt.getHours() - 3);
+
   return (
     <tr>
       <td>{supply(application)}</td>
@@ -44,6 +38,7 @@ UserApplicationRow.propTypes = {
     area: PropTypes.shape(S),
     status: PropTypes.shape(S),
     supply: PropTypes.shape(S),
+    timeStamp: PropTypes.shape(S),
   }).isRequired,
   handleCancel: PropTypes.func.isRequired,
 };

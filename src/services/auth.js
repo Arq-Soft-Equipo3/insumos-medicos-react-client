@@ -1,3 +1,5 @@
+import split from 'lodash.split';
+
 const logIn = (body) => fetch(`${process.env.REACT_APP_API_HOST}/user/login`, {
   method: 'POST',
   body,
@@ -14,6 +16,15 @@ const isAuthenticated = () => !!localStorage.getItem('token');
 
 const logout = () => localStorage.removeItem('token');
 
+const jwtPayload = () => {
+  const jwt = localStorage.getItem('token');
+  const payload = split(jwt, '.')[1];
+  return JSON.parse(atob(payload));
+};
+
+const isAdmin = () => isAuthenticated() && jwtPayload().role === 'administrator';
+const isUser = () => isAuthenticated() && jwtPayload().role === 'user';
+
 export {
-  logIn, signUp, isAuthenticated, logout,
+  logIn, signUp, isAuthenticated, logout, isAdmin, isUser,
 };

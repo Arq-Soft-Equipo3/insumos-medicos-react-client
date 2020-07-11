@@ -57,7 +57,9 @@ const Applications = () => {
                           </tr>
                         </thead>
                         <tbody>
-                          { applications.map((a) => <UserApplicationRow key={a.applicationID.S} handleCancel={handleCancel} application={a} />)}
+                          { applications.map((a) => (
+                            <UserApplicationRow key={a.applicationID.S} handleCancel={handleCancel} application={a} />
+                          ))}
                         </tbody>
                       </Table>
                     )}

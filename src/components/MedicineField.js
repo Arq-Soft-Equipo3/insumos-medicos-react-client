@@ -2,7 +2,7 @@ import React from 'react';
 import { Form, Icon } from 'react-bulma-components';
 import { renderOption } from '../helpers';
 
-const medicines = ['A', 'B', 'C', 'D'];
+const medicines = ['Aspirina', 'Paracetamol', 'Amoxicilina', 'Ibuprofeno', 'Codeína'];
 
 const MedicineField = () => (
   <Form.Field>

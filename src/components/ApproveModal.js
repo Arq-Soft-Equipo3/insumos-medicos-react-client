@@ -6,10 +6,13 @@ import {
 import { renderOption, getFormData } from '../helpers';
 import { approve } from '../services/applications';
 
-const ApproveModal = ({ applicationId: id, show, handleClose }) => {
+const ApproveModal = ({ application, show, handleClose }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
-    const body = getFormData(event.target, { id });
+    const body = getFormData(event.target, {
+      id: application.applicationID.S,
+      filler: application.filler.S,
+    });
     approve(body);
   };
 

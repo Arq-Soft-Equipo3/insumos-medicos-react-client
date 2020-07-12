@@ -2,6 +2,7 @@ module.exports = {
   env: {
     browser: true,
     es6: true,
+    jest: true,
   },
   extends: [
     'plugin:react/recommended',
@@ -26,5 +27,6 @@ module.exports = {
     'jsx-a11y/label-has-associated-control': 0,
     'react/require-default-props': 0,
     'react/forbid-prop-types': 0,
+    'react/jsx-props-no-spreading': 0,
   },
 };

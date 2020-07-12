@@ -16,12 +16,15 @@ const statuses = {
 const UserApplicationRow = ({ application, handleCancel }) => {
   const createdAt = new Date(application.timeStamp.S);
   createdAt.setHours(createdAt.getHours() - 3);
-
   return (
     <tr>
       <td>{supply(application)}</td>
       <td>{application.area.S}</td>
-      <td>{statuses[toLowerCase(application.status.S)]}</td>
+      <td>
+        {statuses[toLowerCase(application.status.S)]}
+      </td>
+      <td>{application.provider && application.provider.S}</td>
+      <td>{application.motive && application.motive.S}</td>
       <td>{timeAgo.format(createdAt)}</td>
       <td style={{ textAlign: 'center' }}>
         {application.status.S === 'Pending' ? <CancelButton applicationId={application.applicationID.S} onCancel={handleCancel} /> : null }
@@ -39,6 +42,9 @@ UserApplicationRow.propTypes = {
     status: PropTypes.shape(S),
     supply: PropTypes.shape(S),
     timeStamp: PropTypes.shape(S),
+    provider: PropTypes.shape(S),
+    motive: PropTypes.shape(S),
+    filler: PropTypes.shape(S),
   }).isRequired,
   handleCancel: PropTypes.func.isRequired,
 };

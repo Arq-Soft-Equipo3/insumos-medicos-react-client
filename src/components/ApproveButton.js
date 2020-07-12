@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Icon } from 'react-bulma-components';
 
@@ -14,6 +14,8 @@ const ApproveButton = ({ handleClick }) => (
   </Button>
 );
 
-ApproveButton.propTypes = {};
+ApproveButton.propTypes = {
+  handleClick: PropTypes.func.isRequired,
+};
 
 export default ApproveButton;

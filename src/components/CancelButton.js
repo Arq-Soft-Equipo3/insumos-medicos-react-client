@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Icon } from 'react-bulma-components';
+import { toast } from 'react-toastify';
 import { cancel } from '../services/applications';
 
 const CancelButton = ({ applicationId, onCancel }) => {
@@ -10,7 +11,7 @@ const CancelButton = ({ applicationId, onCancel }) => {
     const body = JSON.stringify({ id: applicationId });
     onCancel(applicationId);
     setIsLoading(false);
-    cancel(body).then((res) => res.json());
+    cancel(body).then(() => toast.success('La solicitud fue cancelada con éxito.'));
   };
 
   return (

@@ -3,17 +3,25 @@ import PropTypes from 'prop-types';
 import {
   Modal, Form, Icon, Button,
 } from 'react-bulma-components';
+import { toast } from 'react-toastify';
 import { renderOption, getFormData } from '../helpers';
 import { approve } from '../services/applications';
 
-const ApproveModal = ({ application, show, handleClose }) => {
+const ApproveModal = ({
+  application, show, handleClose, handleApprove,
+}) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const body = getFormData(event.target, {
       id: application.applicationID.S,
       filler: application.filler.S,
     });
-    approve(body);
+    approve(body)
+      .then(() => {
+        handleApprove(application.applicationID.S, (JSON.parse(body)).provider);
+        handleClose();
+        toast.success('La solicitud fue aprobada con éxito');
+      });
   };
 
   return (
@@ -30,7 +38,7 @@ const ApproveModal = ({ application, show, handleClose }) => {
                 <div className="select is-fullwidth">
                   <select id="provider" name="provider" required>
                     <option value="">Seleccione un proveedor</option>
-                    {['A', 'B', 'C'].map((e, i) => renderOption(e, e, i))}
+                    {['Mundo Medic', 'Top Medical', 'Hospimed', 'Dispromed'].map((e, i) => renderOption(e, e, i))}
                   </select>
                 </div>
                 <Icon size="small" align="left"><i className="fas fa-medkit" /></Icon>
@@ -47,10 +55,16 @@ const ApproveModal = ({ application, show, handleClose }) => {
   );
 };
 
+const S = { S: PropTypes.string };
+
 ApproveModal.propTypes = {
-  applicationId: PropTypes.string.isRequired,
+  application: PropTypes.shape({
+    applicationID: PropTypes.shape(S),
+    filler: PropTypes.shape(S),
+  }),
   show: PropTypes.bool.isRequired,
   handleClose: PropTypes.func.isRequired,
+  handleApprove: PropTypes.func.isRequired,
 };
 
 export default ApproveModal;

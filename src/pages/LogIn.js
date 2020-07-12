@@ -51,7 +51,6 @@ const LogIn = ({ location: { state: { referrer } = {} } = {} }) => {
                       <Form.Field>
                         <Form.Label htmlFor="email">Email:</Form.Label>
                         <Form.Control iconLeft>
-                          {/* <Form.Input id="email" name="email" type="email" placeholder="Ingresá tu email" required /> */}
                           <input id="email" name="email" className="input" type="email" placeholder="Ingresá tu email" required />
                           <Icon size="small" align="left"><i className="fas fa-envelope" /></Icon>
                         </Form.Control>
@@ -59,7 +58,6 @@ const LogIn = ({ location: { state: { referrer } = {} } = {} }) => {
                       <Form.Field>
                         <Form.Label htmlFor="password">Password:</Form.Label>
                         <Form.Control iconLeft>
-                          {/* <Form.Input id="password" name="password" type="password" placeholder="Ingresá tu password" required /> */}
                           <input id="password" name="password" className="input" type="password" placeholder="Ingresá tu password" required />
                           <Icon size="small" align="left"><i className="fas fa-lock" /></Icon>
                         </Form.Control>

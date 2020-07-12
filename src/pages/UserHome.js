@@ -8,10 +8,10 @@ import { isAuthenticated } from '../services/auth';
 const UserHome = () => (
   <Hero>
     <Hero.Body>
-      <Container>
+      <Container fluid>
         <Section>
           <Columns>
-            <Columns.Column size={8} offset={2}>
+            <Columns.Column size={12}>
               <Content size="medium">
                 <h1 className="title">Bienvenido!</h1>
                 <p>

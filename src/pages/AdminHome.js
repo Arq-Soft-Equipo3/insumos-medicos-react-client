@@ -18,6 +18,16 @@ const AdminHome = () => {
   const isEmpty = isArray(applications) && size(applications) === 0;
   const hasResults = isArray(applications) && size(applications) > 0;
 
+  const approveApplication = (id, provider) => (app) => (app.applicationID.S === id ? { ...app, status: { S: 'Approved' }, provider: { S: provider } } : app);
+  const handleApprove = (id, provider) => (
+    setApplications(applications.map(approveApplication(id, provider)))
+  );
+
+  const rejectApplication = (id, motive) => (app) => (app.applicationID.S === id ? { ...app, status: { S: 'Rejected' }, motive: { S: motive } } : app);
+  const handleReject = (id, motive) => (
+    setApplications(applications.map(rejectApplication(id, motive)))
+  );
+
   useEffect(() => {
     list()
       .then((res) => res.json())
@@ -28,10 +38,10 @@ const AdminHome = () => {
     <>
       <Hero>
         <Hero.Body>
-          <Container>
+          <Container fluid>
             <Section>
               <Columns>
-                <Columns.Column size={10} offset={1}>
+                <Columns.Column size={12}>
                   <Content size="medium">
                     <h1 className="title">Dashboard:</h1>
                     { isLoading && <p>Aguarde un momento, estamos buscando las solicitudes...</p>}
@@ -44,6 +54,8 @@ const AdminHome = () => {
                           <th>Insumo</th>
                           <th>Área</th>
                           <th>Estado</th>
+                          <th>Responsable</th>
+                          <th>Comentarios</th>
                           <th>Creación</th>
                           <th style={{ textAlign: 'center' }}>Acción</th>
                         </tr>
@@ -70,6 +82,7 @@ const AdminHome = () => {
       </Hero>
       <ApproveModal
         application={selectedApplication}
+        handleApprove={handleApprove}
         show={approveModal}
         handleClose={() => {
           setApproveModal(false);
@@ -78,6 +91,7 @@ const AdminHome = () => {
       />
       <RejectModal
         application={selectedApplication}
+        handleReject={handleReject}
         show={rejectModal}
         handleClose={() => {
           setRejectModal(false);

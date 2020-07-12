@@ -27,10 +27,14 @@ const AdminApplicationRow = ({
       <td>{supply(application)}</td>
       <td>{application.area.S}</td>
       <td>{statuses[toLowerCase(application.status.S)]}</td>
+      <td>{application.provider && application.provider.S}</td>
+      <td>{application.motive && application.motive.S}</td>
       <td>{timeAgo.format(createdAt)}</td>
       <td style={{ textAlign: 'center' }}>
-        {isPending(application) && <ApproveButton handleClick={() => { handleSelect(application); handleApprove(); }} />}
-        {isPending(application) && <RejectButton handleClick={() => { handleSelect(application); handleReject(); }} />}
+        {isPending(application)
+        && <ApproveButton handleClick={() => { handleSelect(application); handleApprove(); }} />}
+        {isPending(application)
+        && <RejectButton handleClick={() => { handleSelect(application); handleReject(); }} />}
       </td>
     </tr>
   );
@@ -45,6 +49,9 @@ AdminApplicationRow.propTypes = {
     status: PropTypes.shape(S),
     supply: PropTypes.shape(S),
     filler: PropTypes.shape(S),
+    timeStamp: PropTypes.shape(S),
+    provider: PropTypes.shape(S),
+    motive: PropTypes.shape(S),
   }).isRequired,
   handleApprove: PropTypes.func.isRequired,
   handleReject: PropTypes.func.isRequired,

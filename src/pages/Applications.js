@@ -8,6 +8,7 @@ import { list } from '../services/applications';
 import Navbar from '../components/Navbar';
 import UserApplicationRow from '../components/UserApplicationRow';
 
+// eslint-disable-next-line no-unused-vars
 const responseMessages = {
   200: 'Su solicitud ha sido cancelada con éxito.',
   403: 'La solicitud que intentó cancelar no le pertenece.',
@@ -37,10 +38,10 @@ const Applications = () => {
       <Navbar />
       <Hero>
         <Hero.Body>
-          <Container>
+          <Container fluid>
             <Section>
               <Columns>
-                <Columns.Column size={10} offset={1}>
+                <Columns.Column size={12}>
                   <Content size="medium">
                     <h1 className="title">Mis solicitudes:</h1>
                     { isLoading && <p>Aguarde un momento, estamos buscando sus solicitudes...</p>}
@@ -52,13 +53,19 @@ const Applications = () => {
                             <th>Insumo</th>
                             <th>Área</th>
                             <th>Estado</th>
+                            <th>Responsable</th>
+                            <th>Comentarios</th>
                             <th>Creación</th>
                             <th style={{ textAlign: 'center' }}>Acción</th>
                           </tr>
                         </thead>
                         <tbody>
                           { applications.map((a) => (
-                            <UserApplicationRow key={a.applicationID.S} handleCancel={handleCancel} application={a} />
+                            <UserApplicationRow
+                              key={a.applicationID.S}
+                              handleCancel={handleCancel}
+                              application={a}
+                            />
                           ))}
                         </tbody>
                       </Table>

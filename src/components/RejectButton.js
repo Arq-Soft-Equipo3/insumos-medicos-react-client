@@ -14,6 +14,8 @@ const RejectButton = ({ handleClick }) => (
   </Button>
 );
 
-RejectButton.propTypes = {};
+RejectButton.propTypes = {
+  handleClick: PropTypes.func.isRequired,
+};
 
 export default RejectButton;

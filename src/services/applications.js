@@ -1,30 +1,44 @@
-const options = {
-  headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${localStorage.getItem('token')}` },
-  method: 'POST',
-};
-
 const submitApplication = (body) => fetch(`${process.env.REACT_APP_API_HOST}/applications`, {
-  ...options,
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${localStorage.getItem('token')}`,
+  },
+  method: 'POST',
   body,
 });
 
 const list = () => fetch(`${process.env.REACT_APP_API_HOST}/applications`, {
-  ...options,
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${localStorage.getItem('token')}`,
+  },
   method: 'GET',
 });
 
 const cancel = (body) => fetch(`${process.env.REACT_APP_API_HOST}/applications/cancel`, {
-  ...options,
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${localStorage.getItem('token')}`,
+  },
+  method: 'POST',
   body,
 });
 
 const approve = (body) => fetch(`${process.env.REACT_APP_API_HOST}/applications/approve`, {
-  ...options,
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${localStorage.getItem('token')}`,
+  },
+  method: 'POST',
   body,
 });
 
 const reject = (body) => fetch(`${process.env.REACT_APP_API_HOST}/applications/reject`, {
-  ...options,
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${localStorage.getItem('token')}`,
+  },
+  method: 'POST',
   body,
 });
 

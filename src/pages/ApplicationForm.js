@@ -13,6 +13,7 @@ import SupplyField from '../components/SupplyField';
 const responseMessages = {
   200: 'Su solicitud fue cargada con éxito.',
   404: 'Página no encontrada.',
+  412: 'Ya existe una solicitud para esa combinación área/insumo en estado pendiente, a la brevedad la revisaremos.',
   422: 'Revisá los datos ingresados y volvé a intentar.',
   409: 'El email ingresado ya fue registrado previamente.',
   500: 'Ocurrió un error en el servidor, intenta nuevamente.',

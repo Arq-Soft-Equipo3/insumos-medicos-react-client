@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form, Icon } from 'react-bulma-components';
-import { renderOption } from '../helpers';
+import { renderOption } from '../../../helpers';
 
 const areas = ['Atención de pacientes', 'Técnicos', 'Terapia Intensiva'];
 

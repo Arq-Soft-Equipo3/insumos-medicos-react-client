@@ -1,7 +1,7 @@
 import React from 'react';
 import PropType from 'prop-types';
 import { Form, Icon } from 'react-bulma-components';
-import { renderOption } from '../helpers';
+import { renderOption } from '../../../helpers';
 
 const supplies = ['Barbijos', 'Guantes', 'Máscaras protectoras', 'Medicamentos', 'Respiradores'];
 

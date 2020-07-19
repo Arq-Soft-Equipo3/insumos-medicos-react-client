@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form, Icon } from 'react-bulma-components';
-import { renderOption } from '../helpers';
+import { renderOption } from '../../../helpers';
 
 const medicines = ['Amoxicilina', 'Aspirina', 'Codeína', 'Ibuprofeno', 'Paracetamol'];
 

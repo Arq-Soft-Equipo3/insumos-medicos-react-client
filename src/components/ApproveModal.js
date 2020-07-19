@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  Modal, Form, Icon, Button,
-} from 'react-bulma-components';
+import { Modal, Button } from 'react-bulma-components';
 import { toast } from 'react-toastify';
-import { renderOption, getFormData } from '../helpers';
+import { getFormData } from '../helpers';
 import { approve } from '../services/applications';
+import ProviderField from './Forms/Fields/ProviderField';
 
 const ApproveModal = ({
   application, show, handleClose, handleApprove,
@@ -32,18 +31,7 @@ const ApproveModal = ({
         </Modal.Card.Head>
         <form onSubmit={handleSubmit}>
           <Modal.Card.Body>
-            <Form.Field>
-              <Form.Label htmlFor="provider">Seleccione un proveedor:</Form.Label>
-              <Form.Control iconLeft>
-                <div className="select is-fullwidth">
-                  <select id="provider" name="provider" required>
-                    <option value="">Seleccione un proveedor</option>
-                    {['Dispromed', 'Hospimed', 'Mundo Medic', 'Top Medical'].map((e, i) => renderOption(e, e, i))}
-                  </select>
-                </div>
-                <Icon size="small" align="left"><i className="fas fa-medkit" /></Icon>
-              </Form.Control>
-            </Form.Field>
+            <ProviderField />
           </Modal.Card.Body>
           <Modal.Card.Foot style={{ textAlign: 'right' }}>
             <Button submit color="success" onClick={() => {}}>Guardar</Button>

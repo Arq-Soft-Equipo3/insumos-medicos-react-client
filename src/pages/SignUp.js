@@ -6,42 +6,14 @@ import {
 import { toast } from 'react-toastify';
 import { signUp } from '../services/auth';
 import Navbar from '../components/Navbar';
-import { getFormData, renderOption } from '../helpers';
+import { getFormData } from '../helpers';
+import CityField from '../components/Forms/Fields/CityField';
 
 const errorMessages = {
   422: 'Revisá los datos ingresados y volvé a intentar.',
   409: 'El email ingresado ya fue registrado previamente.',
   500: 'Ocurrió un error en el servidor, intenta nuevamente.',
 };
-
-const cities = [
-  'Ciudad Autónoma de Buenos Aires',
-  'Almirante Brown',
-  'Avellaneda',
-  'Berazategui',
-  'Buenos Aires',
-  'Esteban Echeverría',
-  'Ezeiza',
-  'Florencio Varela',
-  'General San Martín',
-  'Hurlingham',
-  'Ituzaingó',
-  'José C. Paz',
-  'La Matanza',
-  'Lanús',
-  'Lomas de Zamora',
-  'Malvinas Argentinas',
-  'Merlo',
-  'Moreno',
-  'Morón',
-  'Quilmes',
-  'San Fernando',
-  'San Isidro',
-  'San Miguel',
-  'Tigre',
-  'Tres de Febrero',
-  'Vicente López',
-];
 
 const SignUp = () => {
   const [redirect, setRedirect] = useState(false);
@@ -118,19 +90,7 @@ const SignUp = () => {
                           <Icon size="small" align="left"><i className="fas fa-briefcase" /></Icon>
                         </Form.Control>
                       </Form.Field>
-                      <Form.Field>
-                        <Form.Label htmlFor="city">Localidad:</Form.Label>
-                        <Form.Control iconLeft>
-                          <div className="select is-fullwidth">
-                            <select id="city" name="city" required>
-                              <option value="">¿En qué localidad se encuentra?</option>
-                              {cities.map((e, i) => renderOption(e, e, i))}
-                            </select>
-                          </div>
-                          <Icon size="small" align="left"><i className="fas fa-map-marker" /></Icon>
-                        </Form.Control>
-                      </Form.Field>
-
+                      <CityField />
                       <Button submit fullwidth outlined size="medium" color="info" loading={isLoading}>Registrarme</Button>
                     </form>
                   </Notification>

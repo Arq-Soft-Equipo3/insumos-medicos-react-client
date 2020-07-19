@@ -38,7 +38,7 @@ const ApproveModal = ({
                 <div className="select is-fullwidth">
                   <select id="provider" name="provider" required>
                     <option value="">Seleccione un proveedor</option>
-                    {['Mundo Medic', 'Top Medical', 'Hospimed', 'Dispromed'].map((e, i) => renderOption(e, e, i))}
+                    {['Dispromed', 'Hospimed', 'Mundo Medic', 'Top Medical'].map((e, i) => renderOption(e, e, i))}
                   </select>
                 </div>
                 <Icon size="small" align="left"><i className="fas fa-medkit" /></Icon>

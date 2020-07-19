@@ -14,7 +14,9 @@ const errorMessages = {
   500: 'Ocurrió un error en el servidor, intenta nuevamente.',
 };
 
-const cities = ['Almirante Brown',
+const cities = [
+  'Ciudad Autónoma de Buenos Aires',
+  'Almirante Brown',
   'Avellaneda',
   'Berazategui',
   'Buenos Aires',
@@ -38,7 +40,8 @@ const cities = ['Almirante Brown',
   'San Miguel',
   'Tigre',
   'Tres de Febrero',
-  'Vicente López'];
+  'Vicente López',
+];
 
 const SignUp = () => {
   const [redirect, setRedirect] = useState(false);

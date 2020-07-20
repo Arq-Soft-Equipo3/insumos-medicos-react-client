@@ -3,15 +3,9 @@ import PropTypes from 'prop-types';
 import toLowerCase from 'lodash.lowercase';
 import CancelButton from './CancelButton';
 import timeAgo from '../helpers/time-ago';
+import StatusBadge from './StatusBadge';
 
 const supply = (app) => (app.medicine ? app.medicine.S : app.supply.S);
-
-const statuses = {
-  pending: 'Pendiente',
-  rejected: 'Rechazado',
-  approved: 'Aprobado',
-  canceled: 'Cancelada',
-};
 
 const UserApplicationRow = ({ application, handleCancel }) => {
   const createdAt = new Date(application.timeStamp.S);
@@ -20,9 +14,7 @@ const UserApplicationRow = ({ application, handleCancel }) => {
     <tr>
       <td>{supply(application)}</td>
       <td>{application.area.S}</td>
-      <td>
-        {statuses[toLowerCase(application.status.S)]}
-      </td>
+      <td><StatusBadge status={toLowerCase(application.status.S)} /></td>
       <td>{application.provider && application.provider.S}</td>
       <td>{application.motive && application.motive.S}</td>
       <td>{timeAgo.format(createdAt)}</td>

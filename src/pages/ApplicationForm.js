@@ -6,9 +6,9 @@ import { toast } from 'react-toastify';
 import { submitApplication } from '../services/applications';
 import Navbar from '../components/Navbar';
 import { getFormData } from '../helpers';
-import MedicineField from '../components/MedicineField';
-import AreaField from '../components/AreaField';
-import SupplyField from '../components/SupplyField';
+import SupplyField from '../components/Forms/Fields/SupplyField';
+import AreaField from '../components/Forms/Fields/AreaField';
+import MedicineField from '../components/Forms/Fields/MedicineField';
 
 const responseMessages = {
   200: 'Su solicitud fue cargada con éxito.',

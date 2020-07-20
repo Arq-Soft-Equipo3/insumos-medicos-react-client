@@ -10,7 +10,7 @@ const ApproveButton = ({ handleClick }) => (
     size="small"
     onClick={handleClick}
   >
-    <Icon size="small"><i className="fas fa-thumbs-up" /></Icon>
+    <Icon size="small"><i className="fas fa-check" /></Icon>
   </Button>
 );
 

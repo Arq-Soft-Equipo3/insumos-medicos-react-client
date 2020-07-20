@@ -16,14 +16,14 @@ const CancelButton = ({ applicationId, onCancel }) => {
 
   return (
     <Button
-      style={{ borderRadius: '50%' }}
+      style={{ borderRadius: '50%', backgroundColor: '#ebd27f', color: '#927a25' }}
       className="is-icon-button"
-      color="danger"
+      color="warning"
       size="small"
       loading={isLoading}
       onClick={cancelFn}
     >
-      <Icon size="small"><i className="fas fa-times-circle" /></Icon>
+      <Icon size="small"><i className="fas fa-ban" /></Icon>
     </Button>
   );
 };

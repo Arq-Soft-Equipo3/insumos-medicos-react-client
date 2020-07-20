@@ -10,7 +10,7 @@ const RejectButton = ({ handleClick }) => (
     size="small"
     onClick={handleClick}
   >
-    <Icon size="small"><i className="fas fa-thumbs-down" /></Icon>
+    <Icon size="small"><i className="fas fa-times" /></Icon>
   </Button>
 );
 

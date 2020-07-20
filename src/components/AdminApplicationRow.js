@@ -4,17 +4,11 @@ import toLowerCase from 'lodash.lowercase';
 import ApproveButton from './ApproveButton';
 import RejectButton from './RejectButton';
 import timeAgo from '../helpers/time-ago';
+import StatusBadge from './StatusBadge';
 
 const supply = (app) => (app.medicine ? app.medicine.S : app.supply.S);
 
 const isPending = (application) => application.status.S === 'Pending';
-
-const statuses = {
-  pending: 'Pendiente',
-  rejected: 'Rechazado',
-  approved: 'Aprobado',
-  canceled: 'Cancelada',
-};
 
 const AdminApplicationRow = ({
   application, handleApprove, handleReject, handleSelect,
@@ -26,7 +20,7 @@ const AdminApplicationRow = ({
       <td>{application.filler.S}</td>
       <td>{supply(application)}</td>
       <td>{application.area.S}</td>
-      <td>{statuses[toLowerCase(application.status.S)]}</td>
+      <td><StatusBadge status={toLowerCase(application.status.S)} /></td>
       <td>{application.provider && application.provider.S}</td>
       <td>{application.motive && application.motive.S}</td>
       <td>{timeAgo.format(createdAt)}</td>

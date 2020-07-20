@@ -4,7 +4,6 @@ import {
 } from 'react-bulma-components';
 import isArray from 'lodash.isarray';
 import size from 'lodash.size';
-import { toast } from 'react-toastify';
 import AdminApplicationRow from '../components/AdminApplicationRow';
 import ApproveModal from '../components/ApproveModal';
 import RejectModal from '../components/RejectModal';

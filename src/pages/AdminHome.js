@@ -4,16 +4,19 @@ import {
 } from 'react-bulma-components';
 import isArray from 'lodash.isarray';
 import size from 'lodash.size';
+import { toast } from 'react-toastify';
 import AdminApplicationRow from '../components/AdminApplicationRow';
 import ApproveModal from '../components/ApproveModal';
 import RejectModal from '../components/RejectModal';
 import { list } from '../services/applications';
+import { verifySession } from '../helpers';
 
 const AdminHome = () => {
   const [applications, setApplications] = useState(null);
   const [approveModal, setApproveModal] = useState(false);
   const [rejectModal, setRejectModal] = useState(false);
   const [selectedApplication, setSelectedApplication] = useState(null);
+
   const isLoading = applications === null;
   const isEmpty = isArray(applications) && size(applications) === 0;
   const hasResults = isArray(applications) && size(applications) > 0;
@@ -30,6 +33,7 @@ const AdminHome = () => {
 
   useEffect(() => {
     list()
+      .then(verifySession)
       .then((res) => res.json())
       .then((data) => (setApplications(data)));
   }, []);

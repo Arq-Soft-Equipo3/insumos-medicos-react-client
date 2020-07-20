@@ -5,7 +5,7 @@ import {
 } from 'react-bulma-components';
 import { toast } from 'react-toastify';
 import { reject } from '../services/applications';
-import { getFormData } from '../helpers';
+import { getFormData, verifySession } from '../helpers';
 
 const RejectModal = ({
   application, show, handleClose, handleReject,
@@ -17,10 +17,13 @@ const RejectModal = ({
       filler: application.filler.S,
     });
     reject(body)
-      .then(() => {
-        handleReject(application.applicationID.S, (JSON.parse(body)).motive);
-        handleClose();
-        toast.success('La solicitud fue rechazada con éxito');
+      .then(verifySession)
+      .then((res) => {
+        if (res.ok) {
+          handleReject(application.applicationID.S, (JSON.parse(body)).motive);
+          handleClose();
+          toast.success('La solicitud fue rechazada con éxito');
+        }
       });
   };
   return (

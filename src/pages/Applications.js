@@ -7,6 +7,7 @@ import {
 import { list } from '../services/applications';
 import Navbar from '../components/Navbar';
 import UserApplicationRow from '../components/UserApplicationRow';
+import { verifySession } from '../helpers';
 
 // eslint-disable-next-line no-unused-vars
 const responseMessages = {
@@ -25,6 +26,7 @@ const Applications = () => {
 
   useEffect(() => {
     list()
+      .then(verifySession)
       .then((res) => res.json())
       .then((data) => (setApplications(data)));
   }, []);

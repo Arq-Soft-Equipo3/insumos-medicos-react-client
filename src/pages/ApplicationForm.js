@@ -5,7 +5,7 @@ import {
 import { toast } from 'react-toastify';
 import { submitApplication } from '../services/applications';
 import Navbar from '../components/Navbar';
-import { getFormData } from '../helpers';
+import { getFormData, verifySession } from '../helpers';
 import SupplyField from '../components/Forms/Fields/SupplyField';
 import AreaField from '../components/Forms/Fields/AreaField';
 import MedicineField from '../components/Forms/Fields/MedicineField';
@@ -29,6 +29,7 @@ const ApplicationForm = () => {
     setIsLoading(true);
     const body = getFormData(event.target);
     submitApplication(body)
+      .then(verifySession)
       .then(({ ok, status }) => [ok ? toast.success : toast.error, responseMessages[status]])
       .then(([toastFn, message]) => {
         toastFn(message);

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Modal, Button } from 'react-bulma-components';
 import { toast } from 'react-toastify';
-import { getFormData } from '../helpers';
+import { getFormData, verifySession } from '../helpers';
 import { approve } from '../services/applications';
 import ProviderField from './Forms/Fields/ProviderField';
 
@@ -16,10 +16,13 @@ const ApproveModal = ({
       filler: application.filler.S,
     });
     approve(body)
-      .then(() => {
-        handleApprove(application.applicationID.S, (JSON.parse(body)).provider);
-        handleClose();
-        toast.success('La solicitud fue aprobada con éxito');
+      .then(verifySession)
+      .then((res) => {
+        if (res.ok) {
+          handleApprove(application.applicationID.S, (JSON.parse(body)).provider);
+          handleClose();
+          toast.success('La solicitud fue aprobada con éxito');
+        }
       });
   };
 

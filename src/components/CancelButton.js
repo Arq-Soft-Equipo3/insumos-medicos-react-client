@@ -17,8 +17,9 @@ const CancelButton = ({ applicationId, onCancel }) => {
           toast.success('La solicitud fue cancelada con éxito.');
           onCancel(applicationId);
         }
+      }).finally(() => {
+        setIsLoading(false);
       });
-    setIsLoading(false);
   };
 
   return (

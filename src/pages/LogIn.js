@@ -37,7 +37,7 @@ const LogIn = ({ location: { state: { referrer } = {} } = {} }) => {
   };
 
   return (
-    redirect ? <Redirect to={referrer || { referrer: { pathname: '/' } }} />
+    redirect ? <Redirect to={referrer || { referrer: { pathname: '/mis-solicitudes' } }} />
       : (
         <>
           <Navbar />

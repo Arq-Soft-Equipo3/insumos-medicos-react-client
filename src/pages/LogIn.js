@@ -6,7 +6,7 @@ import {
 import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
 import { logIn } from '../services/auth';
-import Navbar from '../components/Navbar';
+import Navbar from '../components/Header/Navbar';
 import { getFormData } from '../helpers';
 
 const errorMessages = {

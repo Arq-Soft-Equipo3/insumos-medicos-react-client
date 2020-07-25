@@ -1,5 +1,5 @@
 import React from 'react';
-import Navbar from '../components/Navbar';
+import Navbar from '../components/Header/Navbar';
 import { isAdmin } from '../services/auth';
 import AdminHome from './AdminHome';
 import UserHome from './UserHome';

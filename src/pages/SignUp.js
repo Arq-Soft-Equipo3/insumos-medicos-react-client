@@ -5,7 +5,7 @@ import {
 } from 'react-bulma-components';
 import { toast } from 'react-toastify';
 import { signUp } from '../services/auth';
-import Navbar from '../components/Navbar';
+import Navbar from '../components/Header/Navbar';
 import { getFormData } from '../helpers';
 import CityField from '../components/Forms/Fields/CityField';
 

@@ -1,8 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import AuthLink from './AuthLink';
-import logo from '../logo.jpg';
-import { isUser, isAdmin } from '../services/auth';
+import LogoutButton from './LogoutButton';
+import SignupButton from './SignupButton';
+import LoginButton from './LoginButton';
+import logo from '../../logo.jpg';
+import {
+  isUser, isAuthenticated, isGuest,
+} from '../../services/auth';
 
 const Navbar = () => (
   <nav className="navbar" role="navigation" aria-label="main navigation">
@@ -25,7 +29,6 @@ const Navbar = () => (
 
     <div className="navbar-menu">
       <div className="navbar-start">
-        <Link to="/" className="navbar-item">{isAdmin() ? 'Dashboard' : 'Inicio'}</Link>
         { isUser() && <Link to="/solicitud" className="navbar-item">Cargar solicitud</Link>}
         { isUser() && <Link to="/mis-solicitudes" className="navbar-item">Mis solicitudes</Link>}
       </div>
@@ -33,7 +36,9 @@ const Navbar = () => (
       <div className="navbar-end">
         <div className="navbar-item">
           <div className="buttons">
-            <AuthLink />
+            { isAuthenticated() && <LogoutButton /> }
+            { isGuest() && <SignupButton /> }
+            { isGuest() && <LoginButton /> }
           </div>
         </div>
       </div>

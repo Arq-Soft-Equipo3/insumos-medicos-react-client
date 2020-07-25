@@ -4,7 +4,7 @@ import {
 } from 'react-bulma-components';
 import { toast } from 'react-toastify';
 import { submitApplication } from '../services/applications';
-import Navbar from '../components/Navbar';
+import Navbar from '../components/Header/Navbar';
 import { getFormData, verifySession } from '../helpers';
 import SupplyField from '../components/Forms/Fields/SupplyField';
 import AreaField from '../components/Forms/Fields/AreaField';

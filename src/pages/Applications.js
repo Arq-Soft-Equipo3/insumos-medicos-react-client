@@ -5,7 +5,7 @@ import {
   Hero, Section, Columns, Container, Content, Table,
 } from 'react-bulma-components';
 import { list } from '../services/applications';
-import Navbar from '../components/Navbar';
+import Navbar from '../components/Header/Navbar';
 import UserApplicationRow from '../components/UserApplicationRow';
 import { verifySession } from '../helpers';
 

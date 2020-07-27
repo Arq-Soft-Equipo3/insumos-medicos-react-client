@@ -5,14 +5,14 @@ const withRedirectLogic = (predicate, redirectPath) => ({ component: Component, 
   <Route
     {...rest}
     render={({ location, ...props }) => (predicate()
-      ? <Component {...props} />
-      : (
+      ? (
         <Redirect to={{
           pathname: redirectPath,
           state: { referrer: location },
         }}
         />
-      ))}
+      )
+      : <Component {...props} />)}
   />
 );
 

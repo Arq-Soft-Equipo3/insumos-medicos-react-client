@@ -12,6 +12,8 @@ import UserRoute from './components/Router/UserRoute';
 import 'react-toastify/dist/ReactToastify.css';
 import GuestRoute from './components/Router/GuestRoute';
 
+// TODO: check the reason why logout route is returning LogIn component and not doing
+// some extra deauth thing.
 function App() {
   return (
     <Router>

@@ -1,6 +1,5 @@
 import React from 'react';
-import { Form, Icon } from 'react-bulma-components';
-import { renderOption } from '../../../helpers';
+import Select from './Select';
 
 const cities = [
   'Ciudad Autónoma de Buenos Aires',
@@ -31,19 +30,6 @@ const cities = [
   'Vicente López',
 ];
 
-const CityField = () => (
-  <Form.Field>
-    <Form.Label htmlFor="city">Localidad:</Form.Label>
-    <Form.Control iconLeft>
-      <div className="select is-fullwidth">
-        <select id="city" name="city" required>
-          <option value="">¿En qué localidad se encuentra?</option>
-          {cities.map((e, i) => renderOption(e, e, i))}
-        </select>
-      </div>
-      <Icon size="small" align="left"><i className="fas fa-map-marker" /></Icon>
-    </Form.Control>
-  </Form.Field>
-);
+const CityField = () => <Select label="Localidad" name="city" blankOption="¿En qué localidad se encuentra?" options={cities} icon="map-marker" />;
 
 export default CityField;

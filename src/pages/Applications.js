@@ -27,12 +27,21 @@ const Applications = () => {
   const [selectedApplication, setSelectedApplication] = useState(null);
   const isEmpty = isLoading === false && size(applications) === 0;
   const hasResults = isLoading === false && size(applications) > 0;
+
   const cancelApplication = (id) => (app) => (app.applicationID.S === id ? { ...app, status: { S: 'Canceled' } } : app);
-  const handleCancel = (id) => setApplications(applications.map(cancelApplication(id)));
+  const handleCancel = (id) => (
+    setApplications(applications.map(cancelApplication(id)))
+  );
+
   const approveApplication = (id, provider) => (app) => (app.applicationID.S === id ? { ...app, status: { S: 'Approved' }, provider: { S: provider } } : app);
-  const handleApprove = (id, provider) => setApplications(applications.map(approveApplication(id, provider)));
+  const handleApprove = (id, provider) => (
+    setApplications(applications.map(approveApplication(id, provider)))
+  );
+
   const rejectApplication = (id, motive) => (app) => (app.applicationID.S === id ? { ...app, status: { S: 'Rejected' }, motive: { S: motive } } : app);
-  const handleReject = (id, motive) => setApplications(applications.map(rejectApplication(id, motive)));
+  const handleReject = (id, motive) => (
+    setApplications(applications.map(rejectApplication(id, motive)))
+  );
 
   return (
     <>

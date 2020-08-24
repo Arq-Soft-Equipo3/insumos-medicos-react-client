@@ -1,34 +1,39 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import toLowerCase from 'lodash.lowercase';
-import ApproveButton from './ApproveButton';
-import RejectButton from './RejectButton';
-import timeAgo from '../helpers/time-ago';
-import StatusBadge from './StatusBadge';
+import { isAdmin, isUser } from '../../services/auth';
+import ApproveButton from '../ApproveButton';
+import RejectButton from '../RejectButton';
+import CancelButton from '../CancelButton';
+import StatusBadge from '../StatusBadge';
+import timeAgo from '../../helpers/time-ago';
 
 const supply = (app) => (app.medicine ? app.medicine.S : app.supply.S);
 
 const isPending = (application) => application.status.S === 'Pending';
 
-const AdminApplicationRow = ({
-  application, handleApprove, handleReject, handleSelect,
+const ApplicationRow = ({
+  application, handleApprove, handleReject, handleSelect, handleCancel,
 }) => {
   const createdAt = new Date(application.timeStamp.S);
   createdAt.setHours(createdAt.getHours() - 3);
+
   return (
     <tr>
-      <td>{application.filler.S}</td>
+      { isAdmin() && <td>{application.filler.S}</td> }
       <td>{supply(application)}</td>
       <td>{application.area.S}</td>
       <td><StatusBadge status={toLowerCase(application.status.S)} /></td>
       <td>{application.provider && application.provider.S}</td>
       <td>{application.motive && application.motive.S}</td>
-      <td>{timeAgo.format(createdAt)}</td>
+      <td>{timeAgo(createdAt)}</td>
       <td style={{ textAlign: 'center' }}>
-        {isPending(application)
-        && <ApproveButton handleClick={() => { handleSelect(application); handleApprove(); }} />}
-        {isPending(application)
-        && <RejectButton handleClick={() => { handleSelect(application); handleReject(); }} />}
+        { isAdmin() && isPending(application)
+          && <ApproveButton handleClick={() => { handleSelect(application); handleApprove(); }} /> }
+        { isAdmin() && isPending(application)
+          && <RejectButton handleClick={() => { handleSelect(application); handleReject(); }} /> }
+        { isUser() && isPending(application)
+          && <CancelButton applicationId={application.applicationID.S} onCancel={handleCancel} /> }
       </td>
     </tr>
   );
@@ -36,7 +41,7 @@ const AdminApplicationRow = ({
 
 const S = { S: PropTypes.string };
 
-AdminApplicationRow.propTypes = {
+ApplicationRow.propTypes = {
   application: PropTypes.shape({
     applicationID: PropTypes.shape(S),
     area: PropTypes.shape(S),
@@ -50,6 +55,7 @@ AdminApplicationRow.propTypes = {
   handleApprove: PropTypes.func.isRequired,
   handleReject: PropTypes.func.isRequired,
   handleSelect: PropTypes.func.isRequired,
+  handleCancel: PropTypes.func.isRequired,
 };
 
-export default AdminApplicationRow;
+export default ApplicationRow;

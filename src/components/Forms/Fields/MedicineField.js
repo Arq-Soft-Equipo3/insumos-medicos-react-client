@@ -1,22 +1,8 @@
 import React from 'react';
-import { Form, Icon } from 'react-bulma-components';
-import { renderOption } from '../../../helpers';
+import Select from './Select';
 
 const medicines = ['Amoxicilina', 'Aspirina', 'Codeína', 'Ibuprofeno', 'Paracetamol'];
 
-const MedicineField = () => (
-  <Form.Field>
-    <Form.Label htmlFor="medicine">Medicamento:</Form.Label>
-    <Form.Control iconLeft>
-      <div className="select is-fullwidth">
-        <select id="medicine" name="medicine" required>
-          <option value="">¿Qué medicamento necesita?</option>
-          {medicines.map((e, i) => renderOption(e, e, i))}
-        </select>
-      </div>
-      <Icon size="small" align="left"><i className="fas fa-medkit" /></Icon>
-    </Form.Control>
-  </Form.Field>
-);
+const MedicineField = () => <Select label="Medicamento" name="medicine" blankOption="¿Qué medicamento necesita?" options={medicines} icon="medkit" />;
 
 export default MedicineField;

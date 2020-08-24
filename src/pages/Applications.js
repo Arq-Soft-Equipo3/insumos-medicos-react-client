@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import isArray from 'lodash.isarray';
+import React, { useState } from 'react';
 import size from 'lodash.size';
 import {
-  Hero, Section, Columns, Container, Content, Table,
+  Hero, Section, Columns, Container, Content,
 } from 'react-bulma-components';
-import { list } from '../services/applications';
-import Navbar from '../components/Navbar';
-import UserApplicationRow from '../components/UserApplicationRow';
-import { verifySession } from '../helpers';
+import Navbar from '../components/Header/Navbar';
+
+import { isAdmin } from '../services/auth';
+import ApproveModal from '../components/ApproveModal';
+import RejectModal from '../components/RejectModal';
+import useApplications from '../components/useApplications';
+import ApplicationsTable from '../components/Tables/ApplicationsTable';
 
 // eslint-disable-next-line no-unused-vars
 const responseMessages = {
@@ -19,21 +21,27 @@ const responseMessages = {
 };
 
 const Applications = () => {
-  const [applications, setApplications] = useState(null);
-  const isLoading = applications === null;
-  const isEmpty = isArray(applications) && size(applications) === 0;
-  const hasResults = isArray(applications) && size(applications) > 0;
-
-  useEffect(() => {
-    list()
-      .then(verifySession)
-      .then((res) => res.json())
-      .then((data) => (setApplications(data)));
-  }, []);
+  const [applications, setApplications, isLoading] = useApplications();
+  const [approveModal, setApproveModal] = useState(false);
+  const [rejectModal, setRejectModal] = useState(false);
+  const [selectedApplication, setSelectedApplication] = useState(null);
+  const isEmpty = isLoading === false && size(applications) === 0;
+  const hasResults = isLoading === false && size(applications) > 0;
 
   const cancelApplication = (id) => (app) => (app.applicationID.S === id ? { ...app, status: { S: 'Canceled' } } : app);
+  const handleCancel = (id) => (
+    setApplications(applications.map(cancelApplication(id)))
+  );
 
-  const handleCancel = (id) => setApplications(applications.map(cancelApplication(id)));
+  const approveApplication = (id, provider) => (app) => (app.applicationID.S === id ? { ...app, status: { S: 'Approved' }, provider: { S: provider } } : app);
+  const handleApprove = (id, provider) => (
+    setApplications(applications.map(approveApplication(id, provider)))
+  );
+
+  const rejectApplication = (id, motive) => (app) => (app.applicationID.S === id ? { ...app, status: { S: 'Rejected' }, motive: { S: motive } } : app);
+  const handleReject = (id, motive) => (
+    setApplications(applications.map(rejectApplication(id, motive)))
+  );
 
   return (
     <>
@@ -45,33 +53,19 @@ const Applications = () => {
               <Columns>
                 <Columns.Column size={12}>
                   <Content size="medium">
-                    <h1 className="title">Mis solicitudes:</h1>
-                    { isLoading && <p>Aguarde un momento, estamos buscando sus solicitudes...</p>}
-                    { isEmpty && <p>Aún no cargaste solicitudes.</p>}
-                    { hasResults && (
-                      <Table>
-                        <thead>
-                          <tr>
-                            <th>Insumo</th>
-                            <th>Área</th>
-                            <th>Estado</th>
-                            <th>Responsable</th>
-                            <th>Comentarios</th>
-                            <th>Creación</th>
-                            <th style={{ textAlign: 'center' }}>Acción</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          { applications.map((a) => (
-                            <UserApplicationRow
-                              key={a.applicationID.S}
-                              handleCancel={handleCancel}
-                              application={a}
-                            />
-                          ))}
-                        </tbody>
-                      </Table>
-                    )}
+                    <h1 className="title">{isAdmin() ? 'Dashboard' : 'Mis solicitudes:'}</h1>
+                    { isLoading && <p>Aguarde un momento, estamos buscando sus solicitudes...</p> }
+                    { isEmpty && <p>Aún no cargaste solicitudes.</p> }
+                    { hasResults
+                        && (
+                        <ApplicationsTable
+                          applications={applications}
+                          handleCancel={handleCancel}
+                          setSelectedApplication={setSelectedApplication}
+                          setApproveModal={setApproveModal}
+                          setRejectModal={setRejectModal}
+                        />
+                        ) }
                   </Content>
                 </Columns.Column>
               </Columns>
@@ -79,6 +73,28 @@ const Applications = () => {
           </Container>
         </Hero.Body>
       </Hero>
+      { isAdmin() && (
+        <ApproveModal
+          application={selectedApplication}
+          handleApprove={handleApprove}
+          show={approveModal}
+          handleClose={() => {
+            setApproveModal(false);
+            setSelectedApplication(null);
+          }}
+        />
+      )}
+      { isAdmin() && (
+        <RejectModal
+          application={selectedApplication}
+          handleReject={handleReject}
+          show={rejectModal}
+          handleClose={() => {
+            setRejectModal(false);
+            setSelectedApplication(null);
+          }}
+        />
+      )}
     </>
   );
 };

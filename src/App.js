@@ -2,27 +2,29 @@ import React from 'react';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
 } from 'react-router-dom';
 
 import { ToastContainer } from 'react-toastify';
 import {
   Home, SignUp, LogIn, Applications, ApplicationForm,
 } from './pages';
-import PrivateRoute from './components/PrivateRoute';
+import UserRoute from './components/Router/UserRoute';
 import 'react-toastify/dist/ReactToastify.css';
+import GuestRoute from './components/Router/GuestRoute';
 
+// TODO: check the reason why logout route is returning LogIn component and not doing
+// some extra deauth thing.
 function App() {
   return (
     <Router>
       <div className="app-container">
         <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/login" component={LogIn} />
-          <Route path="/signup" component={SignUp} />
-          <Route path="/logout" component={LogIn} />
-          <PrivateRoute path="/solicitud" component={ApplicationForm} />
-          <PrivateRoute path="/mis-solicitudes" component={Applications} />
+          <GuestRoute path="/" exact component={Home} />
+          <GuestRoute path="/login" component={LogIn} />
+          <GuestRoute path="/signup" component={SignUp} />
+          <UserRoute path="/logout" component={LogIn} />
+          <UserRoute path="/solicitud" component={ApplicationForm} />
+          <UserRoute path="/mis-solicitudes" component={Applications} />
         </Switch>
         <ToastContainer position="bottom-right" />
       </div>

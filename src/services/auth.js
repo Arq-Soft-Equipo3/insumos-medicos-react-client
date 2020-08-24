@@ -1,4 +1,5 @@
 import split from 'lodash.split';
+import negate from 'lodash.negate';
 
 const logIn = (body) => fetch(`${process.env.REACT_APP_API_HOST}/user/login`, {
   method: 'POST',
@@ -14,6 +15,8 @@ const signUp = (body) => fetch(`${process.env.REACT_APP_API_HOST}/user/signup`, 
 
 const isAuthenticated = () => !!localStorage.getItem('token');
 
+const isGuest = negate(isAuthenticated);
+
 const logout = () => localStorage.removeItem('token');
 
 const jwtPayload = () => {
@@ -26,5 +29,5 @@ const isAdmin = () => isAuthenticated() && jwtPayload().role === 'administrator'
 const isUser = () => isAuthenticated() && jwtPayload().role === 'user';
 
 export {
-  logIn, signUp, isAuthenticated, logout, isAdmin, isUser,
+  logIn, signUp, isAuthenticated, logout, isAdmin, isUser, isGuest,
 };

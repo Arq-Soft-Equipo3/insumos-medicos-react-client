@@ -26,7 +26,7 @@ const ApplicationRow = ({
       <td><StatusBadge status={toLowerCase(application.status.S)} /></td>
       <td>{application.provider && application.provider.S}</td>
       <td>{application.motive && application.motive.S}</td>
-      <td>{timeAgo.format(createdAt)}</td>
+      <td>{timeAgo(createdAt)}</td>
       <td style={{ textAlign: 'center' }}>
         { isAdmin() && isPending(application) && <ApproveButton handleClick={() => { handleSelect(application); handleApprove(); }} /> }
         { isAdmin() && isPending(application) && <RejectButton handleClick={() => { handleSelect(application); handleReject(); }} /> }

@@ -11,7 +11,6 @@
     "@testing-library/user-event": "^7.2.1",
     "bulma": "^0.8.2",
     "classnames": "^2.2.6",
-    "javascript-time-ago": "^2.0.8",
     "lodash.isarray": "^4.0.0",
     "lodash.lowercase": "^4.3.0",
     "lodash.negate": "^3.0.2",

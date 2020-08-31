@@ -8,7 +8,7 @@ import Navbar from '../components/Header/Navbar';
 import { isAdmin } from '../services/auth';
 import ApproveModal from '../components/ApproveModal';
 import RejectModal from '../components/RejectModal';
-import useApplications from '../components/useApplications';
+import useApplications, { CANCEL, APPROVE, REJECT } from '../components/useApplications';
 import ApplicationsTable from '../components/Tables/ApplicationsTable';
 
 // eslint-disable-next-line no-unused-vars
@@ -21,27 +21,17 @@ const responseMessages = {
 };
 
 const Applications = () => {
-  const [applications, setApplications, isLoading] = useApplications();
+  const [applications, dispatch, isLoading] = useApplications();
   const [approveModal, setApproveModal] = useState(false);
   const [rejectModal, setRejectModal] = useState(false);
   const [selectedApplication, setSelectedApplication] = useState(null);
+
   const isEmpty = isLoading === false && size(applications) === 0;
   const hasResults = isLoading === false && size(applications) > 0;
 
-  const cancelApplication = (id) => (app) => (app.applicationID.S === id ? { ...app, status: { S: 'Canceled' } } : app);
-  const handleCancel = (id) => (
-    setApplications(applications.map(cancelApplication(id)))
-  );
-
-  const approveApplication = (id, provider) => (app) => (app.applicationID.S === id ? { ...app, status: { S: 'Approved' }, provider: { S: provider } } : app);
-  const handleApprove = (id, provider) => (
-    setApplications(applications.map(approveApplication(id, provider)))
-  );
-
-  const rejectApplication = (id, motive) => (app) => (app.applicationID.S === id ? { ...app, status: { S: 'Rejected' }, motive: { S: motive } } : app);
-  const handleReject = (id, motive) => (
-    setApplications(applications.map(rejectApplication(id, motive)))
-  );
+  const handleCancel = (id) => dispatch({ type: CANCEL, payload: { id } });
+  const handleApprove = (id, provider) => dispatch({ type: APPROVE, payload: { id, provider } });
+  const handleReject = (id, motive) => dispatch({ type: REJECT, payload: { id, motive } });
 
   return (
     <>
